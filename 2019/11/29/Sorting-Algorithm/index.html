@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="Sorting Algorithem(updating)   冒泡排序(Bubble Sort) &amp;emsp;&amp;emsp;冒泡排序正如其名，是让乱序的数像泡泡一样一个接一个“冒上来”。 &amp;emsp;&amp;emsp;该方法设置两层循环（时间复杂度为O(n^2))，外层循环进行(n-1)次迭代，指冒出(n-1)次气泡；内层循环则是一次冒泡的过程。 代码如下：  &#x2F;&#x2F;从小到大排序 #inclu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-29T19:00:18.782Z">
+<meta property="og:updated_time" content="2019-11-30T07:04:50.944Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-CHZAdMLY" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-JuiVOmAt" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="3096834640" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <hr>
@@ -423,7 +423,7 @@
 <strong>代码如下：</strong><br>
 <pre>
 //从小到大排序
-#include<bits/stdc++.h>
+#include&lt;bits/stdc++.h&gt;
 
 <p>using namespace std;<br>int a[N];//N为数组长度常量</p>
 <p>int main(){<br>    int temp;<br>    for(int i=0;i&lt;N-1；i++){<br>        for(int j=0;j&lt;N-1;j++){<br>            if(a[j]&gt;a[j+1]){<br>                temp = a[j];<br>                a[j] = a[j+1];<br>                a[j+1] = temp;<br>            }//若左边的数大于有边的数则交换两数，将更大的数不断右移<br>        }<br>    }<br>    return 0;<br>}<br></pre></p>
@@ -431,6 +431,19 @@
 <font color=pink>Next</font>
 <hr>
 <head><strong>快速排序(Quicksort)</strong></head>
+<p>&emsp;&emsp;快速排序是利用递归的一种排序。</p>
+<p>&emsp;&emsp;首先在一组数列中取一个key值(将它赋值给一个temp，因为这个值本身也要参加排序，我自己写的时候犯蠢了，让这个值固定不动了)，然后在数列左右两边分别向中间遍历，并在必要时进行交换，使得比key值小的数都在左边，比key值大的数都在右边，而两边交汇处则正是key值应该在的地方，而由于在下面的代码中，会控制<font color=red>原key值位置不变</font>(即开头)，这时将key值插入(与交汇位置的值交换)。</p>
+<p>&emsp;&emsp;这一通操作后,key值得绝对位置确定了。而key值两边的值还是乱序的，那么两边现在其实就可以看作两个缩短版的原数列，分别采取同上的操作(即递归中的调用函数本身)，然后不断确定新的key值，而每确定一个，就会在其两边产生更短的乱序数列，知道产生的乱序数列只有一个值的时候，则没有必要再排，递归完成。</p>
+<hr>
+<strong>代码如下：</strong>
+<pre>
+int a[N]={....};//使用全局变量可以方便不同函数调用
+
+<p>void quickSort(int left,int right ) {<br>    int i, j,temp,t;<br>    i = left;<br>    j = right;<br>    temp = a[left];<br>    if (left &gt;= right)return;<br>    while (i != j) {<br>        //这两处while循环的”=”使得与key值相等的数位置不变<br>        while (a[j] &gt;= temp&amp;&amp;i&amp;ltj)<br>            –j;<br>        while (a[i] &lt;= temp&amp;&amp;i&lt;j)<br>            ++i;<br>        if (i &lt;= j) {<br>            t = a[i];<br>            a[i] = a[j];<br>            a[j] = t;<br>        }<br>    }<br>    a[left] = a[i];<br>    a[i] = temp;<br>    //将下一轮排序的首位值传入，在全局数组中确定位置<br>    quickSort(left, i - 1);<br>    quickSort(i + 1, right);<br>}<br></pre></p>
+<hr>
+<font color=pink>next</font>
+<hr>
+<head><strong>桶排序(Bucket Sort)</strong></head>
 <p>&emsp;&emsp;</p>
       
     </div>
@@ -547,7 +560,7 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
+                <a href="/Algorithem/index.html">
                   <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
