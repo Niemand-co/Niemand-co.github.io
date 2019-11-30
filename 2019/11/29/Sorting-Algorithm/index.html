@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="Sorting Algorithem(updating)   冒泡排序(Bubble Sort) &amp;emsp;&amp;emsp;冒泡排序正如其名，是让乱序的数像泡泡一样一个接一个“冒上来”。 &amp;emsp;&amp;emsp;该方法设置两层循环（时间复杂度为O(n^2))，外层循环进行(n-1)次迭代，指冒出(n-1)次气泡；内层循环则是一次冒泡的过程。 代码如下：  &#x2F;&#x2F;从小到大排序 #inclu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-30T07:33:34.381Z">
+<meta property="og:updated_time" content="2019-11-30T07:36:43.764Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-tYPWDETq" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-ZLPcFcqD" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="3096834640" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <hr>
@@ -439,7 +439,7 @@
 <pre>
 int a[N]={....};//使用全局变量可以方便不同函数调用
 
-<p>void quickSort(int left,int right ) {<br>    int i, j,temp,t;<br>    i = left;<br>    j = right;<br>    temp = a[left];<br>    if (left &gt;= right)return;<br>    while (i != j) {<br>        //这两处while循环的”=”使得与key值相等的数位置不变<br>        while (a[j] &gt;= temp&amp;&amp;i&lt;j)<br>            –j;<br>        while (a[i] &lt;= temp&amp;&amp;i&lt;j)<br>            ++i;<br>        if (i &lt;= j) {<br>            t = a[i];<br>            a[i] = a[j];<br>            a[j] = t;<br>        }<br>    }<br>    a[left] = a[i];<br>    a[i] = temp;<br>    //将下一轮排序的首位值传入，在全局数组中确定位置<br>    quickSort(left, i - 1);<br>    quickSort(i + 1, right);<br>}<br></pre></p>
+<p>void quickSort(int left,int right ) {<br>    int i, j,temp,t;<br>    i = left;<br>    j = right;<br>    temp = a[left];<br>    if (left &gt;= right)return;<br>    while (i != j) {<br>        //这两处while循环的”=”使得与key值相等的数位置不变<br>        while (a[j] &gt;= temp&amp;&amp;i&lt;j)<br>            j–;<br>        while (a[i] &lt;= temp&amp;&amp;i&lt;j)<br>            i++;<br>        if (i &lt;= j) {<br>            t = a[i];<br>            a[i] = a[j];<br>            a[j] = t;<br>        }<br>    }<br>    a[left] = a[i];<br>    a[i] = temp;<br>    //将下一轮排序的首位值传入，在全局数组中确定位置<br>    quickSort(left, i - 1);<br>    quickSort(i + 1, right);<br>}<br></pre></p>
 <hr>
 <font color=pink>next</font>
 <hr>
