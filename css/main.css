@@ -1090,7 +1090,7 @@ pre .javascript .function {
   bottom: 30px;
 }
 .header {
-  background: transparent;
+  background: url("/next/source/images/spear.jpg");
 }
 .header-inner {
   position: relative;
@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #26ffde;
+  background: #65fbec;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3119,5 +3119,23 @@ pre .javascript .function {
   }
   .pagination {
     margin: 8px 0 0;
+  }
+}
+@font-face {
+  font-family: ChannelSlanted2;
+}
+.site-title {
+  font-size: 40px;
+  font-family: 'ChannelSlanted2';
+}
+@media screen and (min-width: 1200px) {
+  body {
+    background-image: url("/images/background.jfif");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+  }
+  #footer a {
+    color: #eee;
   }
 }
