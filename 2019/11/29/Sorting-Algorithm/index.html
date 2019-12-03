@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="Sorting Algorithem(updating)   冒泡排序(Bubble Sort) &amp;emsp;&amp;emsp;冒泡排序正如其名，是让乱序的数像泡泡一样一个接一个“冒上来”。 &amp;emsp;&amp;emsp;该方法设置两层循环（时间复杂度为O(n^2))，外层循环进行(n-1)次迭代，指冒出(n-1)次气泡；内层循环则是一次冒泡的过程。 代码如下：  &#x2F;&#x2F;从小到大排序 #inclu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-30T07:38:19.710Z">
+<meta property="og:updated_time" content="2019-12-03T04:46:39.824Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-bKBVpkJG" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-gDIbCVcg" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="3096834640" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <hr>
@@ -437,14 +437,30 @@
 <hr>
 <strong>代码如下：</strong>
 <pre>
+#include&lt;bits/stdc++.h>
 int a[N]={....};//使用全局变量可以方便不同函数调用
 
 <p>void quickSort(int left,int right ) {<br>    int i, j,temp,t;<br>    i = left;<br>    j = right;<br>    temp = a[left];<br>    if (left &gt;= right)return;<br>    while (i != j) {<br>        //这两处while循环的”=”使得与key值相等的数位置不变<br>        while (a[j] &gt;= temp&amp;&amp;i&lt;j)<br>            j- -;<br>        while (a[i] &lt;= temp&amp;&amp;i&lt;j)<br>            i++;<br>        if (i &lt;= j) {<br>            t = a[i];<br>            a[i] = a[j];<br>            a[j] = t;<br>        }<br>    }<br>    a[left] = a[i];<br>    a[i] = temp;<br>    //将下一轮排序的首位值传入，在全局数组中确定位置<br>    quickSort(left, i - 1);<br>    quickSort(i + 1, right);<br>}<br></pre></p>
 <hr>
 <font color=pink>next</font>
 <hr>
-<head><strong>桶排序(Bucket Sort)</strong></head>
-<p>&emsp;&emsp;</p>
+<head><strong>桶排序(Bucket Sort)、基数排序(Radix Sort)</strong></head>
+<p>&emsp;&emsp;桶排序这个名字是个很形象的描述，就是先确定几个用来装数据的“桶”，而这些“桶”管理不同的数据范围，也就是将待排序的一组乱序数据根据自身的大小放入不同的“桶”中，而这些已经表明范围的“桶”已经拥有一定的顺序，或者说确定和分配范围的过程就是一种预排序。这些被大致划分并排序的一组组数据内部在进行排序就可以再重新输出时得到完整排序的数列了。</p>
+<p>&emsp;&emsp;在选择“桶”的范围时，我们往往会选择能使数据均匀分布的划分方式。而对于基数排序，他的排序思想和桶排序基本相同，区别就在于基数排序在造“桶”时会选择常用的进制数，如10、2、16等，而这也就使得这种排序更加适用于数据更加集中的乱序数列的排序中。</p>
+<p>&emsp;&emsp;在下面的例子中将展示以10为划分范围的基数排序，其实也同样展现了桶排序的实现方法。</p>
+<pre>
+#include<iostream>
+#include<stack>
+(#include&lt;bits/stdc++.h>)
+#define N ...
+
+<p>using namespace std;</p>
+<p>int a[N];//由于这里以10为范围，数组中的数应尽量集中<br>//c/cpp中桶的实现可以用结构体来进行<br>struct bucket<br>{<br>    stack<int> pos;<br>    struct bucket *next;<br>};</p>
+<p>void BucketSort(){<br>    struct bucket *p;<br>    int temp;<br>    for(int i=0;i&lt;N;++i){<br>        //下面将每个数对应各自的“桶”，以10为划分范围<br>        for(int j=0;j&lt;(a[i]/10);++j){<br>            p=p-&gt;next;<br>        }<br>        //在找到对应的桶后，与之前的数进行比较，保证各个“桶”内也按序排列<br>        (但这里的内部排序实现可能这里写得比较复杂，你可以用你自己觉得ok的方法)<br>        while(p-&gt;pos.top()==NULL||p-&gt;pos.top()&lt;=a[i])<br>            p-&gt;pos.push(temp);<br>        while(p-&gt;pos.top()&gt;a[i]){<br>            p-&gt;temp.push(p-&gt;pos.top());<br>            p-&gt;pos.pop();<br>        }<br>        p-&gt;pos.push(a[i]);<br>        while(p-&gt;temp.top()!=NULL){<br>            p-&gt;pos.push(p-&gt;temp.top());<br>            p-&gt;temp.pop();<br>        }<br>    }<br>}<br>int main(){<br>…//函数调用<br>}<br></pre></p>
+<hr>
+<font color=pink>next</font>
+<hr>
+<head><strong>直接插入排序(Insertion Sort)、分组插入排序(Grouping Insertion Sort)</strong></head>
       
     </div>
     
