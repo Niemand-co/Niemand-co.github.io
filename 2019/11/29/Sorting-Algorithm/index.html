@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="Sorting Algorithem(updating)   冒泡排序(Bubble Sort) &amp;emsp;&amp;emsp;冒泡排序正如其名，是让乱序的数像泡泡一样一个接一个“冒上来”。 &amp;emsp;&amp;emsp;该方法设置两层循环（时间复杂度为O(n^2))，外层循环进行(n-1)次迭代，指冒出(n-1)次气泡；内层循环则是一次冒泡的过程。 代码如下：  &#x2F;&#x2F;从小到大排序 #inclu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-03T04:46:39.824Z">
+<meta property="og:updated_time" content="2019-12-03T12:36:14.767Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-gDIbCVcg" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-jMRUdNVF" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="3096834640" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <hr>
@@ -455,12 +455,21 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
 #define N ...
 
 <p>using namespace std;</p>
-<p>int a[N];//由于这里以10为范围，数组中的数应尽量集中<br>//c/cpp中桶的实现可以用结构体来进行<br>struct bucket<br>{<br>    stack<int> pos;<br>    struct bucket *next;<br>};</p>
+<p>int a[N]={…};//由于这里以10为范围，数组中的数应尽量集中<br>//c/cpp中桶的实现可以用结构体来进行<br>struct bucket<br>{<br>    stack<int> pos;<br>    struct bucket *next;<br>};</p>
 <p>void BucketSort(){<br>    struct bucket *p;<br>    int temp;<br>    for(int i=0;i&lt;N;++i){<br>        //下面将每个数对应各自的“桶”，以10为划分范围<br>        for(int j=0;j&lt;(a[i]/10);++j){<br>            p=p-&gt;next;<br>        }<br>        //在找到对应的桶后，与之前的数进行比较，保证各个“桶”内也按序排列<br>        (但这里的内部排序实现可能这里写得比较复杂，你可以用你自己觉得ok的方法)<br>        while(p-&gt;pos.top()==NULL||p-&gt;pos.top()&lt;=a[i])<br>            p-&gt;pos.push(temp);<br>        while(p-&gt;pos.top()&gt;a[i]){<br>            p-&gt;temp.push(p-&gt;pos.top());<br>            p-&gt;pos.pop();<br>        }<br>        p-&gt;pos.push(a[i]);<br>        while(p-&gt;temp.top()!=NULL){<br>            p-&gt;pos.push(p-&gt;temp.top());<br>            p-&gt;temp.pop();<br>        }<br>    }<br>}<br>int main(){<br>…//函数调用<br>}<br></pre></p>
 <hr>
 <font color=pink>next</font>
 <hr>
-<head><strong>直接插入排序(Insertion Sort)、分组插入排序(Grouping Insertion Sort)</strong></head>
+<head><strong>直接插入排序(Insertion Sort)</strong></head>
+<p>&emsp;&emsp;插入排序就是在乱序数列中(最左)先取一个初始数，因为只有一个数，所以认为已经排好序(此处以自小至大为例)，而从剩下的依旧乱序的数列依次取出一个在已经排好序的做数列中找到相应的位置，再插入。(就是一般被大家比作理扑克那个)</p>
+<pre>
+#include<iostream>
+#define N ...
+
+<p>using namespace std;</p>
+<p>int a[N]={…};<br>void InsertionSort(){<br>    int i,j;<br>    int temp;<br>    for(i=1;i&lt;N;++i){<br>        if(a[i]&lt;a[i-1]){<br>        //若右边的数已经大于左边最后一个数则无需插入<br>            temp=a[i];<br>            for(j=i-1;j&gt;=0&amp;&amp;a[j]&gt;temp;j–){<br>                    a[j+1]=a[j];<br>            }<br>            a[j+1]=temp;<br>        }<br>    }<br>}<br>int main(){<br>…//调用函数<br>}<br></pre></p>
+<head><strong>分组插入排序(Grouping Insertion Sort)</strong></head>
+<p>&emsp;&emsp;</p>
       
     </div>
     
@@ -576,7 +585,7 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/Algorithem/index.html">
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
