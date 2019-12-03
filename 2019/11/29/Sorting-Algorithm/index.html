@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="Sorting Algorithem(updating)   冒泡排序(Bubble Sort) &amp;emsp;&amp;emsp;冒泡排序正如其名，是让乱序的数像泡泡一样一个接一个“冒上来”。 &amp;emsp;&amp;emsp;该方法设置两层循环（时间复杂度为O(n^2))，外层循环进行(n-1)次迭代，指冒出(n-1)次气泡；内层循环则是一次冒泡的过程。 代码如下：  &#x2F;&#x2F;从小到大排序 #inclu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-03T12:36:14.767Z">
+<meta property="og:updated_time" content="2019-12-03T13:16:51.093Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-LFZvpWHK" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-NwbrAnJt" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="3096834640" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <hr>
@@ -457,6 +457,18 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
 <p>using namespace std;</p>
 <p>int a[N]={…};//由于这里以10为范围，数组中的数应尽量集中<br>//c/cpp中桶的实现可以用结构体来进行<br>struct bucket<br>{<br>    stack<int> pos;<br>    struct bucket *next;<br>};</p>
 <p>void BucketSort(){<br>    struct bucket *p;<br>    int temp;<br>    for(int i=0;i&lt;N;++i){<br>        //下面将每个数对应各自的“桶”，以10为划分范围<br>        for(int j=0;j&lt;(a[i]/10);++j){<br>            p=p-&gt;next;<br>        }<br>        //在找到对应的桶后，与之前的数进行比较，保证各个“桶”内也按序排列<br>        (但这里的内部排序实现可能这里写得比较复杂，你可以用你自己觉得ok的方法)<br>        while(p-&gt;pos.top()==NULL||p-&gt;pos.top()&lt;=a[i])<br>            p-&gt;pos.push(temp);<br>        while(p-&gt;pos.top()&gt;a[i]){<br>            p-&gt;temp.push(p-&gt;pos.top());<br>            p-&gt;pos.pop();<br>        }<br>        p-&gt;pos.push(a[i]);<br>        while(p-&gt;temp.top()!=NULL){<br>            p-&gt;pos.push(p-&gt;temp.top());<br>            p-&gt;temp.pop();<br>        }<br>    }<br>}<br>int main(){<br>…//函数调用<br>}<br></pre></p>
+<hr>
+<font color=pink>next</font>
+<hr>
+<head><stong>哈希排序(Hash Sort)</strong></head>
+<p>&emsp;&emsp;哈希排序我认为可以算是一种特殊的桶排序，一种划分范围是1的桶排序。</p>
+<p>&emsp;&emsp;也正因如此，哈希排序免除了桶内排序的操作，思想上也更为直接，但同时这种方法肯定是不稳定的，而且是一种牺牲空间换时间的方法。但在某些对空间要求并不苛刻的情况下，哈希不失为一种好的排序选择。(哈希虽然可耻，但是有效)</p>
+<pre>
+#include<iostrem>
+#define N 10
+
+<p>using namespace std;</p>
+<p>int a[N]={};<br>void HashSort(){<br>    int p[100];//创建一个包含待排数列中所有数范围的数组<br>    for(int i=0;i&lt;N;++i){//在数列中有的数对应的位置做标记<br>        p[a[i]]++;<br>    }<br>}<br>int main(){<br>…//调用函数<br>}<br></pre></p>
 <hr>
 <font color=pink>next</font>
 <hr>
