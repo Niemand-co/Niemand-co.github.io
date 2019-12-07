@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
   
@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="Sorting Algorithem(updating)   冒泡排序(Bubble Sort) &amp;emsp;&amp;emsp;冒泡排序正如其名，是让乱序的数像泡泡一样一个接一个“冒上来”。 &amp;emsp;&amp;emsp;该方法设置两层循环（时间复杂度为O(n^2))，外层循环进行(n-1)次迭代，指冒出(n-1)次气泡；内层循环则是一次冒泡的过程。 代码如下：  &#x2F;&#x2F;从小到大排序 #inclu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-03T13:23:06.266Z">
+<meta property="og:updated_time" content="2019-12-03T16:25:48.828Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,14 +410,14 @@
 
       
         
-    <div id="aplayer-HOIoxynq" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-JEZJElDe" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="3096834640" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
-<hr>
-<head><font size=15 color=#66ccff>Sorting Algorithem(updating)</font><meta name="generator" content="Hexo 4.0.0"><link rel="alternate" href="/atom.xml" title="Niemand" type="application/atom+xml">
-</head>
-<hr>
-<head><strong>冒泡排序(Bubble Sort)</strong></head>
+<p><hr></p>
+<p><head><font size=15 color=#66ccff>Sorting Algorithem(updating)</font><meta name="generator" content="Hexo 4.0.0"><link rel="alternate" href="/atom.xml" title="Niemand" type="application/atom+xml">
+</head></p>
+<p><hr></p>
+<p><head><strong>冒泡排序(Bubble Sort)</strong></head></p>
 <p>&emsp;&emsp;冒泡排序正如其名，是让乱序的数像泡泡一样一个接一个“冒上来”。</p>
 <p>&emsp;&emsp;该方法设置两层循环（时间复杂度为O(n^2))，外层循环进行(n-1)次迭代，指冒出(n-1)次气泡；内层循环则是一次冒泡的过程。</p>
 <strong>代码如下：</strong><br>
@@ -425,8 +425,23 @@
 //从小到大排序
 #include&lt;bits/stdc++.h&gt;
 
-<p>using namespace std;<br>int a[N];//N为数组长度常量</p>
-<p>int main(){<br>    int temp;<br>    for(int i=0;i&lt;N-1；i++){<br>        for(int j=0;j&lt;N-1;j++){<br>            if(a[j]&gt;a[j+1]){<br>                temp = a[j];<br>                a[j] = a[j+1];<br>                a[j+1] = temp;<br>            }//若左边的数大于有边的数则交换两数，将更大的数不断右移<br>        }<br>    }<br>    return 0;<br>}<br></pre></p>
+using namespace std;
+int a[N];//N为数组长度常量
+
+int main(){
+    int temp;
+    for(int i=0;i&lt;N-1；i++){
+        for(int j=0;j&lt;N-1;j++){
+            if(a[j]&gt;a[j+1]){
+                temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+            }//若左边的数大于有边的数则交换两数，将更大的数不断右移
+        }
+    }
+    return 0;
+}
+</pre>
 <hr>
 <font color=pink>Next</font>
 <hr>
@@ -440,7 +455,31 @@
 #include&lt;bits/stdc++.h>
 int a[N]={....};//使用全局变量可以方便不同函数调用
 
-<p>void quickSort(int left,int right ) {<br>    int i, j,temp,t;<br>    i = left;<br>    j = right;<br>    temp = a[left];<br>    if (left &gt;= right)return;<br>    while (i != j) {<br>        //这两处while循环的”=”使得与key值相等的数位置不变<br>        while (a[j] &gt;= temp&amp;&amp;i&lt;j)<br>            j- -;<br>        while (a[i] &lt;= temp&amp;&amp;i&lt;j)<br>            i++;<br>        if (i &lt;= j) {<br>            t = a[i];<br>            a[i] = a[j];<br>            a[j] = t;<br>        }<br>    }<br>    a[left] = a[i];<br>    a[i] = temp;<br>    //将下一轮排序的首位值传入，在全局数组中确定位置<br>    quickSort(left, i - 1);<br>    quickSort(i + 1, right);<br>}<br></pre></p>
+void quickSort(int left,int right ) {
+    int i, j,temp,t;
+    i = left;
+    j = right;
+    temp = a[left];
+    if (left &gt;= right)return;
+    while (i != j) {
+        //这两处while循环的"="使得与key值相等的数位置不变
+        while (a[j] &gt;= temp&&i&lt;j)
+            j- -;
+        while (a[i] &lt;= temp&&i&lt;j)
+            i++;
+        if (i &lt;= j) {
+            t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+        }
+    }
+    a[left] = a[i];
+    a[i] = temp;
+    //将下一轮排序的首位值传入，在全局数组中确定位置
+    quickSort(left, i - 1);
+    quickSort(i + 1, right);
+}
+</pre>
 <hr>
 <font color=pink>next</font>
 <hr>
@@ -454,9 +493,42 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
 (#include&lt;bits/stdc++.h>)
 #define N ...
 
-<p>using namespace std;</p>
-<p>int a[N]={…};//由于这里以10为范围，数组中的数应尽量集中<br>//c/cpp中桶的实现可以用结构体来进行<br>struct bucket<br>{<br>    stack<int> pos;<br>    struct bucket *next;<br>};</p>
-<p>void BucketSort(){<br>    struct bucket *p;<br>    int temp;<br>    for(int i=0;i&lt;N;++i){<br>        //下面将每个数对应各自的“桶”，以10为划分范围<br>        for(int j=0;j&lt;(a[i]/10);++j){<br>            p=p-&gt;next;<br>        }<br>        //在找到对应的桶后，与之前的数进行比较，保证各个“桶”内也按序排列<br>        (但这里的内部排序实现可能这里写得比较复杂，你可以用你自己觉得ok的方法)<br>        while(p-&gt;pos.top()==NULL||p-&gt;pos.top()&lt;=a[i])<br>            p-&gt;pos.push(temp);<br>        while(p-&gt;pos.top()&gt;a[i]){<br>            p-&gt;temp.push(p-&gt;pos.top());<br>            p-&gt;pos.pop();<br>        }<br>        p-&gt;pos.push(a[i]);<br>        while(p-&gt;temp.top()!=NULL){<br>            p-&gt;pos.push(p-&gt;temp.top());<br>            p-&gt;temp.pop();<br>        }<br>    }<br>}<br>int main(){<br>…//函数调用<br>}<br></pre></p>
+using namespace std;
+
+int a[N]={...};//由于这里以10为范围，数组中的数应尽量集中
+//c/cpp中桶的实现可以用结构体来进行
+struct bucket
+{
+    stack<int> pos;
+    struct bucket *next;
+}bucket;
+
+void BucketSort(){
+    struct bucket *p;
+    int temp;
+    for(int i=0;i&lt;N;++i){
+        //下面将每个数对应各自的“桶”，以10为划分范围
+        for(int j=0;j<(a[i]/10);++j){
+            p=p->next;
+        }
+        //在找到对应的桶后，与之前的数进行比较，保证各个“桶”内也按序排列<br>        (但这里的内部排序实现可能这里写得比较复杂，你可以用你自己觉得ok的方法)
+        while(p->pos.top()==NULL||p->pos.top()<=a[i])
+            p->pos.push(temp);
+        while(p->pos.top()>a[i]){
+            p->temp.push(p->pos.top());
+            p->pos.pop();
+        }
+        p->pos.push(a[i]);
+        while(p->temp.top()!=NULL){
+            p->pos.push(p->temp.top());
+            p->temp.pop();
+        }
+    }
+}
+int main(){
+...//函数调用
+}
+</pre>
 <hr>
 <font color=pink>next</font>
 <hr>
@@ -467,8 +539,19 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
 #include<iostrem>
 #define N 10
 
-<p>using namespace std;</p>
-<p>int a[N]={};<br>void HashSort(){<br>    int p[100];//创建一个包含待排数列中所有数范围的数组<br>    for(int i=0;i&lt;N;++i){//在数列中有的数对应的位置做标记<br>        p[a[i]]++;<br>    }<br>}<br>int main(){<br>…//调用函数<br>}<br></pre></p>
+using namespace std;
+
+int a[N]={};
+void HashSort(){
+    int p[100];//创建一个包含待排数列中所有数范围的数组
+    for(int i=0;i&lt;N;++i){//在数列中有的数对应的位置做标记
+        p[a[i]]++;
+    }
+}
+int main(){
+...//调用函数
+}
+</pre>
 <hr>
 <font color=pink>next</font>
 <hr>
@@ -478,8 +561,27 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
 #include<iostream>
 #define N ...
 
-<p>using namespace std;</p>
-<p>int a[N]={…};<br>void InsertionSort(){<br>    int i,j;<br>    int temp;<br>    for(i=1;i&lt;N;++i){<br>        if(a[i]&lt;a[i-1]){<br>        //若右边的数已经大于左边最后一个数则无需插入<br>            temp=a[i];<br>            for(j=i-1;j&gt;=0&amp;&amp;a[j]&gt;temp;j–){<br>                    a[j+1]=a[j];<br>            }<br>            a[j+1]=temp;<br>        }<br>    }<br>}<br>int main(){<br>…//调用函数<br>}<br></pre></p>
+using namespace std;
+
+int a[N]={...};
+void InsertionSort(){
+    int i,j;
+    int temp;
+    for(i=1;i&lt;N;++i){
+        if(a[i]&lt;a[i-1]){
+        //若右边的数已经大于左边最后一个数则无需插入
+            temp=a[i];
+            for(j=i-1;j&gt;=0&&a[j]&gt;temp;j--){
+                    a[j+1]=a[j];
+            }
+            a[j+1]=temp;
+        }
+    }
+}
+int main(){
+...//调用函数
+}
+</pre>
 <head><strong>分组插入排序(Grouping Insertion Sort)</strong></head>
 <p>&emsp;&emsp;</p>
       
@@ -520,6 +622,10 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/03/Data-Structure/" rel="prev" title="Data Structure">
+                Data Structure <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -587,7 +693,7 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
               
                 <a href="/archives%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -598,7 +704,7 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
               
               <div class="site-state-item site-state-categories">
                 <a href="/Algorithem/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1181,6 +1287,8 @@ int a[N]={....};//使用全局变量可以方便不同函数调用
   
 
   
+  
+
 
   
 
