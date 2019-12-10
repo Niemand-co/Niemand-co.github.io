@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要a和n互质):  a^{\phi(n)}\ &#x3D;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-10T02:47:56.955Z">
+<meta property="og:updated_time" content="2019-12-10T03:07:47.608Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-PzYiIuzN" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-HFUhCxVg" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="30482386" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <font size=6 color=66ccff>欧拉降幂(Euler Decreasing Power)</font>
@@ -420,7 +420,9 @@
 若(a,p)\ =\ 1,\ 则a^{p-1}\ =\ 1\ (mod\ \ p)</script><p>经欧拉推广(我目前还不会证)，得到欧拉定理<font color=red>(此时需要a和n互质)</font>:</p>
 <script type="math/tex; mode=display">
 a^{\phi(n)}\ =\ 1\ (mod\ \ n)\\其中n表示在[1,n]中与n互质的数的个数</script><p>&emsp;&emsp;而在编程问题中，欧拉降幂可以再不求出数本身的情况下，取得一个数的模值，这样就避免了计算一些超出数据类型范围的大数据。</p>
-<p>&emsp;&emsp;具体的思想过程是首先确定要取得模为$n$,带求解底数为x,指数为$p$,算出$\phi(n)$的值，得到$x^{\phi(n)} = 1 (mod  n)$。将$x^p$化简成$x^{\phi(n)<em>p_1}</em>x^{p_2} (mod  n)$，进一步化简得$x^{p_2} (mod  n)$。现在已经能够非常简单地算出不会超范围的答案了。</p>
+<p>&emsp;&emsp;具体的思想过程是首先确定要取得模为$n$,带求解底数为x,指数为$p$,算出$\phi(n)$的值，得到$x^{\phi(n)} = 1 (mod  n)$。将$x^p$化简成:</p>
+<script type="math/tex; mode=display">
+x^{\phi(n)*p_1}*x^{p_2}\ (mod\ \ n)</script><p>&emsp;&emsp;再用欧拉定理等价转化上式子，将其进一步化简得$x^{p_2} (mod  n)$。现在已经能够非常简单地算出不会超范围的答案了。</p>
 <p>&emsp;&emsp;在利用欧拉定理前，首先要获得$\phi(n)$的值，而计算$\phi(n)$欧拉也给出了欧拉函数(我也还不会证2333)：</p>
 <script type="math/tex; mode=display">
 \phi(x)\ =\ x*\prod_{i=1}^n(1-\frac{1}{p_i})</script><p>&emsp;&emsp;让我们把这条式子转化一下，使之更符合编程思路：</p>
