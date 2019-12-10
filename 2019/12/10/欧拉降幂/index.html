@@ -89,15 +89,15 @@
 
 
 
-<meta name="description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要$a$和$n$互质):  a^{\phi(n)">
+<meta name="description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要a和n互质):  a^{\phi(n)}\ &#x3D;">
 <meta name="keywords" content="Number Theory">
 <meta property="og:type" content="article">
 <meta property="og:title" content="欧拉降幂">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;10&#x2F;%E6%AC%A7%E6%8B%89%E9%99%8D%E5%B9%82&#x2F;index.html">
 <meta property="og:site_name" content="Niemand">
-<meta property="og:description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要$a$和$n$互质):  a^{\phi(n)">
+<meta property="og:description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要a和n互质):  a^{\phi(n)}\ &#x3D;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-10T02:16:06.304Z">
+<meta property="og:updated_time" content="2019-12-10T02:20:50.313Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,14 +410,14 @@
 
       
         
-    <div id="aplayer-jAxBTlGN" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-RTRrDbco" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="30482386" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <font size=6 color=66ccff>欧拉降幂(Euler Decreasing Power)</font>
 
 <p>&emsp;&emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(<a href="#jump">费马小定理的证明</a>)，如下：</p>
 <script type="math/tex; mode=display">
-若(a,p)\ =\ 1,\ 则a^{p-1}\ =\ 1\ (mod\ \ p)</script><p>经欧拉推广(我目前还不会证)，得到欧拉定理<font color=red>(此时需要$a$和$n$互质)</font>:</p>
+若(a,p)\ =\ 1,\ 则a^{p-1}\ =\ 1\ (mod\ \ p)</script><p>经欧拉推广(我目前还不会证)，得到欧拉定理<font color=red>(此时需要a和n互质)</font>:</p>
 <script type="math/tex; mode=display">
 a^{\phi(n)}\ =\ 1\ (mod\ \ n)\\其中n表示在[1,n]中与n互质的数的个数</script><p>&emsp;&emsp;而在编程问题中，欧拉降幂可以再不求出数本身的情况下，取得一个数的模值，这样就避免了计算一些超出数据类型范围的大数据。</p>
 <p>&emsp;&emsp;具体的思想过程是首先确定要取得模为$n$,带求解底数为x,指数为$p$,算出$\phi(n)$的值，得到$x^{\phi(n)} = 1 (mod  n)$。将$x^p$化简成$x^{\phi(n)<em>p_1}</em>x^{p_2} (mod  n)$，进一步化简得$x^{p_2} (mod  n)$。现在已经能够非常简单地算出不会超范围的答案了。</p>
