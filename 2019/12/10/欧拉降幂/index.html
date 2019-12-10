@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要a和n互质):  a^{\phi(n)}\ &#x3D;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-10T02:20:50.313Z">
+<meta property="og:updated_time" content="2019-12-10T02:47:56.955Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-RTRrDbco" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-PzYiIuzN" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="30482386" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <font size=6 color=66ccff>欧拉降幂(Euler Decreasing Power)</font>
@@ -438,7 +438,7 @@ a^b\ (mod\ \ n) \ \ \ \ \ b<\phi(n)\\a^{b\%\phi(n)+\phi(n)}\ (mod\ \ n)\ \ \ \ \
 <p>以下是快速幂取模的板子，具体实现在另一篇博客：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpo</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> n)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> temp=<span class="number">2</span>,ans=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            ans*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        temp*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        n&gt;&gt;=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <p><span id="jump"></p>
-<font color=red>**费马小定理的证明:**</font>
+<font color=red>费马小定理的证明:</font>
 
 <p>&emsp;&emsp;$p$的完全剩余系是$\{1,2,\cdots,p-1\}$。</p>
 <blockquote>
@@ -448,7 +448,6 @@ a^b\ (mod\ \ n) \ \ \ \ \ b<\phi(n)\\a^{b\%\phi(n)+\phi(n)}\ (mod\ \ n)\ \ \ \ \
 <p>因为$(a,p) = 1$,那么$\{a,2a,\cdots,a(p-1)\}$也是$p$的一个完全完全剩余系。那么，由完全剩余系的性质得：</p>
 <script type="math/tex; mode=display">
 1*2*\cdots*(p-1)\ \equiv\ a*2a*\cdots*(p-1)a\ (mod\ \ p)\\\because\ ((p-1),p)=1\\\therefore\ a^{p-1}\ (mod\ \ p)\ \equiv\ 1\\即a^{p-1}\ =\ 1\ (mod\ \ p)</script><p>得证。</p>
-<p>&lt;/span&gt;</p>
 
       
     </div>
@@ -1149,6 +1148,26 @@ a^b\ (mod\ \ n) \ \ \ \ \ b<\phi(n)\\a^{b\%\phi(n)+\phi(n)}\ (mod\ \ n)\ \ \ \ \
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
