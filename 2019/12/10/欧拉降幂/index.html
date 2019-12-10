@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Number Theory," />
 
 
 
@@ -89,11 +89,15 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Niemand">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;index.html">
+<meta name="description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要$a$和$n$互质):  a^{\phi(n)">
+<meta name="keywords" content="Number Theory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="欧拉降幂">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;10&#x2F;%E6%AC%A7%E6%8B%89%E9%99%8D%E5%B9%82&#x2F;index.html">
 <meta property="og:site_name" content="Niemand">
+<meta property="og:description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要$a$和$n$互质):  a^{\phi(n)">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-10T02:16:06.304Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -124,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/12/10/欧拉降幂/"/>
 
 
 
 
 
-  <title>Archive | Niemand</title>
+  <title>欧拉降幂 | Niemand</title>
   
 
 
@@ -141,6 +145,9 @@
 
 
   <script src="/live2d-widget/autolload.js"></script>
+<link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
 </head>
   
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -150,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/Niemand-co" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -299,333 +306,208 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/%E6%AC%A7%E6%8B%89%E9%99%8D%E5%B9%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Niemand">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Niemand">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">欧拉降幂</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-10T00:00:00+08:00">
+                2019-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 8 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/10/%E6%AC%A7%E6%8B%89%E9%99%8D%E5%B9%82/" itemprop="url">
-              
-                <span itemprop="name">欧拉降幂</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-10T00:00:00+08:00"
-              content="2019-12-10" >
-          12-10
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/09/Ehrlich-Sieve-and-Linear-Sieve/" itemprop="url">
-              
-                <span itemprop="name">Ehrlich Sieve and Linear Sieve</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-09T00:00:00+08:00"
-              content="2019-12-09" >
-          12-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
         
-        
-        
+    <div id="aplayer-jAxBTlGN" class="aplayer aplayer-tag-marker meting-tag-marker"
+         data-id="30482386" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
+    ></div>
+<font size=6 color=66ccff>欧拉降幂(Euler Decreasing Power)</font>
 
-        
-        
+<p>&emsp;&emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(<a href="#jump">费马小定理的证明</a>)，如下：</p>
+<script type="math/tex; mode=display">
+若(a,p)\ =\ 1,\ 则a^{p-1}\ =\ 1\ (mod\ \ p)</script><p>经欧拉推广(我目前还不会证)，得到欧拉定理<font color=red>(此时需要$a$和$n$互质)</font>:</p>
+<script type="math/tex; mode=display">
+a^{\phi(n)}\ =\ 1\ (mod\ \ n)\\其中n表示在[1,n]中与n互质的数的个数</script><p>&emsp;&emsp;而在编程问题中，欧拉降幂可以再不求出数本身的情况下，取得一个数的模值，这样就避免了计算一些超出数据类型范围的大数据。</p>
+<p>&emsp;&emsp;具体的思想过程是首先确定要取得模为$n$,带求解底数为x,指数为$p$,算出$\phi(n)$的值，得到$x^{\phi(n)} = 1 (mod  n)$。将$x^p$化简成$x^{\phi(n)<em>p_1}</em>x^{p_2} (mod  n)$，进一步化简得$x^{p_2} (mod  n)$。现在已经能够非常简单地算出不会超范围的答案了。</p>
+<p>&emsp;&emsp;在利用欧拉定理前，首先要获得$\phi(n)$的值，而计算$\phi(n)$欧拉也给出了欧拉函数(我也还不会证2333)：</p>
+<script type="math/tex; mode=display">
+\phi(x)\ =\ x*\prod_{i=1}^n(1-\frac{1}{p_i})</script><p>&emsp;&emsp;让我们把这条式子转化一下，使之更符合编程思路：</p>
+<script type="math/tex; mode=display">
+\phi(x)\ =\ x*\prod_{i=1}^np_i(p_i-1)</script><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">Euler_phi</span><span class="params">(ll n)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ll k=(ll)<span class="built_in">sqrt</span>(n+<span class="number">0.5</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ll ans=n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=k;++i)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n%i==<span class="number">0</span>)&#123;<span class="comment">//判断是否为因数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            ans=ans/i*(i<span class="number">-1</span>);<span class="comment">//利用欧拉函数来进行运算</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span>(n%i==<span class="number">0</span>)n/=i;<span class="comment">//每个数的每个因数只能出现一次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(n&gt;<span class="number">1</span>)ans=ans/n*(n<span class="number">-1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>&emsp;&emsp;以上是求得欧拉函数的过程，在得到Euler_Phi的值后，我们便可以将所求的幂运算简化成以下式子：</p>
+<script type="math/tex; mode=display">
+a^b\ =\ a^{b\%phi(n)}\ (mod\ \ n)</script><p>但这还是$a$和$n$互质的情况，推广到一般情况(也就是当$a$和$n$不互质了)则有以下式子：</p>
+<script type="math/tex; mode=display">
+a^b\equiv
+\left
+\{\begin{array}{}
+a^b\ (mod\ \ n) \ \ \ \ \ b<\phi(n)\\a^{b\%\phi(n)+\phi(n)}\ (mod\ \ n)\ \ \ \ \ b\geqslant\phi(n)
+\end{array}\right.</script><p>我们可以通过$\phi(n)$判断$a$,$n$是否互质，从而选择公式,再利用快速幂取模运算求得最终的值。(不知道)</p>
+<p>以下是快速幂取模的板子，具体实现在另一篇博客：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpo</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> n)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> temp=<span class="number">2</span>,ans=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            ans*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        temp*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        n&gt;&gt;=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><span id="jump"></p>
+<font color=red>**费马小定理的证明:**</font>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/07/QuikPower/" itemprop="url">
-              
-                <span itemprop="name">QuikPower</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-07T13:00:27+08:00"
-              content="2019-12-07" >
-          12-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<p>&emsp;&emsp;$p$的完全剩余系是$\{1,2,\cdots,p-1\}$。</p>
+<blockquote>
+<p>完全剩余系就是一个数的全部剩余类组成</p>
+<p>剩余类即任意数对确定的某个数$n$取模时得到的那个数(因此必定在$[0,n-1]$内)</p>
+</blockquote>
+<p>因为$(a,p) = 1$,那么$\{a,2a,\cdots,a(p-1)\}$也是$p$的一个完全完全剩余系。那么，由完全剩余系的性质得：</p>
+<script type="math/tex; mode=display">
+1*2*\cdots*(p-1)\ \equiv\ a*2a*\cdots*(p-1)a\ (mod\ \ p)\\\because\ ((p-1),p)=1\\\therefore\ a^{p-1}\ (mod\ \ p)\ \equiv\ 1\\即a^{p-1}\ =\ 1\ (mod\ \ p)</script><p>得证。</p>
+<p>&lt;/span&gt;</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/03/Data-Structure/" itemprop="url">
-              
-                <span itemprop="name">Data Structure</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-03T23:10:57+08:00"
-              content="2019-12-03" >
-          12-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/29/Sorting-Algorithm/" itemprop="url">
-              
-                <span itemprop="name">Sorting Algorithm</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-29T16:42:45+08:00"
-              content="2019-11-29" >
-          11-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/28/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-28T07:38:36+08:00"
-              content="2019-11-28" >
-          11-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/28/Arrival-of-the-General/" itemprop="url">
-              
-                <span itemprop="name">Arrival of the General</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-28T00:00:00+08:00"
-              content="2019-11-28" >
-          11-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/28/Simple-Mathematical-Optimization/" itemprop="url">
-              
-                <span itemprop="name">Simple Mathematical Optimization</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-28T00:00:00+08:00"
-              content="2019-11-28" >
-          11-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Number-Theory/" rel="tag"># Number Theory</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/09/Ehrlich-Sieve-and-Linear-Sieve/" rel="next" title="Ehrlich Sieve and Linear Sieve">
+                <i class="fa fa-chevron-left"></i> Ehrlich Sieve and Linear Sieve
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -633,6 +515,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -885,6 +771,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1259,26 +1149,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
