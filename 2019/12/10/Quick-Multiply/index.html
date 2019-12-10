@@ -89,14 +89,14 @@
 
 
 
-<meta name="description" content="快速幂   &amp;emsp;&amp;emsp;在一般的幂运算中，给定底数x和质数n，若使用循环，在每次循环中给积变量乘上一个x，总共需要乘n个x，也就是时间复杂度为o(n)。 &amp;emsp;&amp;emsp;但是这样的时间复杂度还是不能满足需求，而快速幂就可以优化加速这样的运算。 &amp;emsp;&amp;emsp;先来分析指数n，我们都知道在计算机中数字都是二进制存储，也就是二进制可以表示所有数，而二进制数每一位只有两种状">
+<meta name="description" content="快速乘(Quick Multiply)  &amp;emsp;&amp;emsp;快速乘是为了应对乘法结果超过数据存储容量的一种算法，他的思想类似于快速幂，都是在乘法过程中不断取模，以保证控制数据大小。 &amp;emsp;&amp;emsp;那么要做到不断取模，就必须将乘法分段完成，这就需要将其中一个乘数转化为二进制，根据其位数，算出$a$与每一位上的1相乘的结果，再进行判断，若这一二进制位是1，则将该结果与答案相加，反之则跳">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QuikPower">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;QuikPower&#x2F;index.html">
+<meta property="og:title" content="Quick Multiply">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;10&#x2F;Quick-Multiply&#x2F;index.html">
 <meta property="og:site_name" content="Niemand">
-<meta property="og:description" content="快速幂   &amp;emsp;&amp;emsp;在一般的幂运算中，给定底数x和质数n，若使用循环，在每次循环中给积变量乘上一个x，总共需要乘n个x，也就是时间复杂度为o(n)。 &amp;emsp;&amp;emsp;但是这样的时间复杂度还是不能满足需求，而快速幂就可以优化加速这样的运算。 &amp;emsp;&amp;emsp;先来分析指数n，我们都知道在计算机中数字都是二进制存储，也就是二进制可以表示所有数，而二进制数每一位只有两种状">
+<meta property="og:description" content="快速乘(Quick Multiply)  &amp;emsp;&amp;emsp;快速乘是为了应对乘法结果超过数据存储容量的一种算法，他的思想类似于快速幂，都是在乘法过程中不断取模，以保证控制数据大小。 &amp;emsp;&amp;emsp;那么要做到不断取模，就必须将乘法分段完成，这就需要将其中一个乘数转化为二进制，根据其位数，算出$a$与每一位上的1相乘的结果，再进行判断，若这一二进制位是1，则将该结果与答案相加，反之则跳">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-07T16:05:05.070Z">
+<meta property="og:updated_time" content="2019-12-10T11:12:21.541Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/07/QuikPower/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/12/10/Quick-Multiply/"/>
 
 
 
 
 
-  <title>QuikPower | Niemand</title>
+  <title>Quick Multiply | Niemand</title>
   
 
 
@@ -316,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/QuikPower/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/Quick-Multiply/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Niemand">
@@ -333,7 +333,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">QuikPower</h1>
+          <h1 class="post-title" itemprop="name headline">Quick Multiply</h1>
         
 
         <div class="post-meta">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-07T13:00:27+08:00">
-                2019-12-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-10T00:00:00+08:00">
+                2019-12-10
               </time>
             
 
@@ -405,20 +405,13 @@
       
 
       
-        <p><hr></p>
-<p><head><font size=15 color=66ccff><strong>快速幂</strong></font><meta name="generator" content="Hexo 4.0.0"><link rel="alternate" href="/atom.xml" title="Niemand" type="application/atom+xml">
-</head></p>
-<p><hr></p>
-<p>&emsp;&emsp;在一般的幂运算中，给定底数x和质数n，若使用循环，在每次循环中给积变量乘上一个x，总共需要乘n个x，也就是时间复杂度为o(n)。</p>
-<p>&emsp;&emsp;但是这样的时间复杂度还是不能满足需求，而快速幂就可以优化加速这样的运算。</p>
-<p>&emsp;&emsp;先来分析指数n，我们都知道在计算机中数字都是二进制存储，也就是二进制可以表示所有数，而二进制数每一位只有两种状态，0和1。那么指数n也就可以表示成二进制数，如下：</p>
+        <font size=10 color=66ccff>快速乘(Quick Multiply)</font>
 
+<p>&emsp;&emsp;快速乘是为了应对乘法结果超过数据存储容量的一种算法，他的思想类似于快速幂，都是在乘法过程中不断取模，以保证控制数据大小。</p>
+<p>&emsp;&emsp;那么要做到不断取模，就必须将乘法分段完成，这就需要将其中一个乘数转化为二进制，根据其位数，算出$a$与每一位上的1相乘的结果，再进行判断，若这一二进制位是1，则将该结果与答案相加，反之则跳过。这样就保证了在得到每个$a$与$2^n$的积被及时取模，不至于超范围。</p>
 <script type="math/tex; mode=display">
-n=2^{p_1}+2^{p_2}+2^{p_3}+\cdots+2^{p_n}</script><p><p>&emsp;&emsp;这样之后，完整的幂运算也就可以表示成：</p></p>
-<script type="math/tex; mode=display">
-ans=x^{2^{p_1}+2^{p_2}+\cdots+2^{p_n}}=x^{2^{p_1}}*x^{2^{p_2}}*\cdots*x^{2^{p_n}}</script><p>&emsp;&emsp;那么如何做到代码实现呢？我们想到$ans$若初值为1，那么我们同样在循环中给$ans$乘上一个值，在循环结束后便能得到答案，而这个乘数就是迭代器$i$控制下的$x^{2^{p_i}}$。虽然和原始做法一样都用了循环，但在快速幂中循环的次数是根据$n$的二进制数的位数而定的,也就是$log_2{n}$，而时间复杂度也自然就是$o(log{n})$级。</p>
-<p>代码实现如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpo</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> n)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> temp=<span class="number">2</span>,ans=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            ans*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        temp*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        n&gt;&gt;=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+a*b=a*(2^{b_1}+2^{b_2}+\cdots+2^{b_n})</script><p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">Quick_Multiply</span><span class="params">(lla,llb,ll mod)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ll ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ll temp=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(b)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)&#123;<span class="comment">//判断该二进制位是否为1,来决定是否加上该位的乘积值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            ans+=(a%mod)；<span class="comment">//保证每次取模</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        a&lt;&lt;=<span class="number">1</span>;<span class="comment">//下一二进制位的相乘结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        b&gt;&gt;=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
       
     </div>
@@ -443,8 +436,8 @@ ans=x^{2^{p_1}+2^{p_2}+\cdots+2^{p_n}}=x^{2^{p_1}}*x^{2^{p_2}}*\cdots*x^{2^{p_n}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/03/Data-Structure/" rel="next" title="Data Structure">
-                <i class="fa fa-chevron-left"></i> Data Structure
+              <a href="/2019/12/10/%E6%AC%A7%E6%8B%89%E9%99%8D%E5%B9%82/" rel="next" title="欧拉降幂">
+                <i class="fa fa-chevron-left"></i> 欧拉降幂
               </a>
             
           </div>
@@ -452,10 +445,6 @@ ans=x^{2^{p_1}+2^{p_2}+\cdots+2^{p_n}}=x^{2^{p_1}}*x^{2^{p_2}}*\cdots*x^{2^{p_n}
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/12/09/Ehrlich-Sieve-and-Linear-Sieve/" rel="prev" title="Ehrlich Sieve and Linear Sieve">
-                Ehrlich Sieve and Linear Sieve <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
