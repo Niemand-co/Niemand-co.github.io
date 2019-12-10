@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Niemand">
 <meta property="og:description" content="欧拉降幂(Euler Decreasing Power)  &amp;emsp;&amp;emsp;在讲欧拉降幂之前，先来讲一下欧拉定理(费马-欧拉定理)。而要讲欧拉定理则要先提一下费马小定理(费马小定理的证明)，如下：  若(a,p)\ &#x3D;\ 1,\ 则a^{p-1}\ &#x3D;\ 1\ (mod\ \ p)经欧拉推广(我目前还不会证)，得到欧拉定理(此时需要a和n互质):  a^{\phi(n)}\ &#x3D;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-10T03:07:47.608Z">
+<meta property="og:updated_time" content="2019-12-10T05:13:12.788Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -410,7 +410,7 @@
 
       
         
-    <div id="aplayer-HFUhCxVg" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-wpWTXvix" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="30482386" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
     ></div>
 <font size=6 color=66ccff>欧拉降幂(Euler Decreasing Power)</font>
@@ -423,11 +423,11 @@ a^{\phi(n)}\ =\ 1\ (mod\ \ n)\\其中n表示在[1,n]中与n互质的数的个数
 <p>&emsp;&emsp;具体的思想过程是首先确定要取得模为$n$,带求解底数为x,指数为$p$,算出$\phi(n)$的值，得到$x^{\phi(n)} = 1 (mod  n)$。将$x^p$化简成:</p>
 <script type="math/tex; mode=display">
 x^{\phi(n)*p_1}*x^{p_2}\ (mod\ \ n)</script><p>&emsp;&emsp;再用欧拉定理等价转化上式子，将其进一步化简得$x^{p_2} (mod  n)$。现在已经能够非常简单地算出不会超范围的答案了。</p>
-<p>&emsp;&emsp;在利用欧拉定理前，首先要获得$\phi(n)$的值，而计算$\phi(n)$欧拉也给出了欧拉函数(我也还不会证2333)：</p>
+<p>&emsp;&emsp;在利用欧拉定理前，首先要获得$\phi(n)$的值，而计算$\phi(n)$欧拉也给出了欧拉函数：</p>
 <script type="math/tex; mode=display">
-\phi(x)\ =\ x*\prod_{i=1}^n(1-\frac{1}{p_i})</script><p>&emsp;&emsp;让我们把这条式子转化一下，使之更符合编程思路：</p>
+\phi(x)\ =\ x*\prod_{i=1}^n(1-\frac{1}{p_i})\\(p_i(i=1,2,\cdots)是n的质因数)</script><p>&emsp;&emsp;让我们把这条式子转化一下，使之更符合编程思路：</p>
 <script type="math/tex; mode=display">
-\phi(x)\ =\ x*\prod_{i=1}^np_i(p_i-1)</script><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">Euler_phi</span><span class="params">(ll n)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ll k=(ll)<span class="built_in">sqrt</span>(n+<span class="number">0.5</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ll ans=n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=k;++i)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n%i==<span class="number">0</span>)&#123;<span class="comment">//判断是否为因数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            ans=ans/i*(i<span class="number">-1</span>);<span class="comment">//利用欧拉函数来进行运算</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span>(n%i==<span class="number">0</span>)n/=i;<span class="comment">//每个数的每个因数只能出现一次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(n&gt;<span class="number">1</span>)ans=ans/n*(n<span class="number">-1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+\phi(x)\ =\ x*\prod_{i=1}^n\frac{p_i-1}{p_i}</script><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> prime[N];<span class="comment">//通过筛法得到的小于n的素数集合</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">Euler_phi</span><span class="params">(ll n)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ll k=(ll)<span class="built_in">sqrt</span>(n+<span class="number">0.5</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ll ans=n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;++i)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n%prime[i]==<span class="number">0</span>)&#123;<span class="comment">//判断是否为因数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            temp=prime[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            ans=ans/temp*(temp<span class="number">-1</span>);<span class="comment">//利用欧拉函数来进行运算</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span>(n%temp==<span class="number">0</span>)n/=temp;<span class="comment">//每个数的每个因数只能出现一次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(n&gt;<span class="number">1</span>)ans=ans/n*(n<span class="number">-1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <p>&emsp;&emsp;以上是求得欧拉函数的过程，在得到Euler_Phi的值后，我们便可以将所求的幂运算简化成以下式子：</p>
 <script type="math/tex; mode=display">
 a^b\ =\ a^{b\%phi(n)}\ (mod\ \ n)</script><p>但这还是$a$和$n$互质的情况，推广到一般情况(也就是当$a$和$n$不互质了)则有以下式子：</p>
@@ -577,7 +577,7 @@ a^b\ (mod\ \ n) \ \ \ \ \ b<\phi(n)\\a^{b\%\phi(n)+\phi(n)}\ (mod\ \ n)\ \ \ \ \
               
               
               <div class="site-state-item site-state-tags">
-                <a href="/tags/Number%20Theory.html">
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
