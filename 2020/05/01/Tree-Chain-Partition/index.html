@@ -89,15 +89,15 @@
 
 
 
-<meta name="description" content="快速幂   &amp;emsp;&amp;emsp;在一般的幂运算中，给定底数x和质数n，若使用循环，在每次循环中给积变量乘上一个x，总共需要乘n个x，也就是时间复杂度为o(n)。 &amp;emsp;&amp;emsp;但是这样的时间复杂度还是不能满足需求，而快速幂就可以优化加速这样的运算。 &amp;emsp;&amp;emsp;先来分析指数n，我们都知道在计算机中数字都是二进制存储，也就是二进制可以表示所有数，而二进制数每一位只有两种状">
+<meta name="description" content="Tree Chain Partition  前置知识：LCA、线段树 &amp;emsp;&amp;emsp;树链剖分(Tree Chain Partition)这是一种将一棵树进行分解成链来进行维护的算法，分为重链剖分和长链剖分。  重链剖分  &amp;emsp;&amp;emsp;重链剖分就是按照子树大小进行分解。首先找到每个父节点中，下接子树最大的子节点，也就是重儿子，进行标记，然后将相邻的标记点连接成链，就是重链了。">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QuikPower">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;QuikPower&#x2F;index.html">
+<meta property="og:title" content="Tree Chain Partition">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;01&#x2F;Tree-Chain-Partition&#x2F;index.html">
 <meta property="og:site_name" content="Niemand">
-<meta property="og:description" content="快速幂   &amp;emsp;&amp;emsp;在一般的幂运算中，给定底数x和质数n，若使用循环，在每次循环中给积变量乘上一个x，总共需要乘n个x，也就是时间复杂度为o(n)。 &amp;emsp;&amp;emsp;但是这样的时间复杂度还是不能满足需求，而快速幂就可以优化加速这样的运算。 &amp;emsp;&amp;emsp;先来分析指数n，我们都知道在计算机中数字都是二进制存储，也就是二进制可以表示所有数，而二进制数每一位只有两种状">
+<meta property="og:description" content="Tree Chain Partition  前置知识：LCA、线段树 &amp;emsp;&amp;emsp;树链剖分(Tree Chain Partition)这是一种将一棵树进行分解成链来进行维护的算法，分为重链剖分和长链剖分。  重链剖分  &amp;emsp;&amp;emsp;重链剖分就是按照子树大小进行分解。首先找到每个父节点中，下接子树最大的子节点，也就是重儿子，进行标记，然后将相邻的标记点连接成链，就是重链了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-11T03:34:17.745Z">
+<meta property="og:updated_time" content="2020-05-03T07:45:12.248Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/07/QuikPower/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/01/Tree-Chain-Partition/"/>
 
 
 
 
 
-  <title>QuikPower | Niemand</title>
+  <title>Tree Chain Partition | Niemand</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/QuikPower/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/Tree-Chain-Partition/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Niemand">
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">QuikPower</h1>
+          <h1 class="post-title" itemprop="name headline">Tree Chain Partition</h1>
         
 
         <div class="post-meta">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-07T13:00:27+08:00">
-                2019-12-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-01T00:00:00+08:00">
+                2020-05-01
               </time>
             
 
@@ -406,20 +406,32 @@
       
 
       
-        <p><hr></p>
-<p><head><font size=15 color=66ccff><strong>快速幂</strong></font><meta name="generator" content="Hexo 4.0.0"><link rel="alternate" href="/atom.xml" title="Niemand" type="application/atom+xml">
-</head></p>
-<p><hr></p>
-<p>&emsp;&emsp;在一般的幂运算中，给定底数x和质数n，若使用循环，在每次循环中给积变量乘上一个x，总共需要乘n个x，也就是时间复杂度为o(n)。</p>
-<p>&emsp;&emsp;但是这样的时间复杂度还是不能满足需求，而快速幂就可以优化加速这样的运算。</p>
-<p>&emsp;&emsp;先来分析指数n，我们都知道在计算机中数字都是二进制存储，也就是二进制可以表示所有数，而二进制数每一位只有两种状态，0和1。那么指数n也就可以表示成二进制数，如下：</p>
+        <center><font size=8 color=66ccff>Tree Chain Partition</font></center>
 
-<script type="math/tex; mode=display">
-n=2^{p_1}+2^{p_2}+2^{p_3}+\cdots+2^{p_n}</script><p><p>&emsp;&emsp;这样之后，完整的幂运算也就可以表示成：</p></p>
-<script type="math/tex; mode=display">
-ans=x^{2^{p_1}+2^{p_2}+\cdots+2^{p_n}}=x^{2^{p_1}}*x^{2^{p_2}}*\cdots*x^{2^{p_n}}</script><p>&emsp;&emsp;那么如何做到代码实现呢？我们想到$ans$若初值为1，那么我们同样在循环中给$ans$乘上一个值，在循环结束后便能得到答案，而这个乘数就是迭代器$i$控制下的$x^{2^{p_i}}$。虽然和原始做法一样都用了循环，但在快速幂中循环的次数是根据$n$的二进制数的位数而定的,也就是$log_2{n}$，而时间复杂度也自然就是$o(log{n})$级。</p>
-<p>代码实现如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpo</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> n)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> temp=<span class="number">2</span>,ans=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            ans*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        temp*=temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        n&gt;&gt;=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>前置知识：<a href="https://niemand-co.github.io/2020/03/27/LCA/" target="_blank" rel="noopener">LCA</a>、<a href="https://niemand-co.github.io/2020/04/30/Segment-Tree/" target="_blank" rel="noopener">线段树</a></p>
+<p>&emsp;&emsp;树链剖分(Tree Chain Partition)这是一种将一棵树进行分解成链来进行维护的算法，分为重链剖分和长链剖分。</p>
+<hr>
+<font size=5 color=ccccff>重链剖分</font>
+
+<p>&emsp;&emsp;重链剖分就是按照子树大小进行分解。首先找到每个父节点中，下接子树最大的子节点，也就是重儿子，进行标记，然后将相邻的标记点连接成链，就是重链了。</p>
+<p>&emsp;&emsp;先利用树状数组建立一棵树：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> to,from,next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;edge[N];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> head[N];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fa[N];<span class="comment">//父节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> siz[N];<span class="comment">//某个节点下的子树大小</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> son[N];<span class="comment">//某个父节点的重儿子</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d[N];<span class="comment">//节点深度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    edge[cnt].from=x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    edge[cnt].to=y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    edge[cnt].next=head[x];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    head[x]=cnt++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在完成建树后，可以开始树剖了。树剖的思想其实还是dfs，通过两次dfs遍历就可以得到重链。</p>
+<p>&emsp;&emsp;第一次dfs时，先记录根节点size为1，然后遍历他的子节点，对于每个子节点进行相同的操作。在到达子节点开始回溯时，将每个子节点的size加到对应父节点的size中，因为这个size代表的是一个节点的子树的大小。若某一父节点的子节点完成操作，则将这一父节点与爷爷节点已经记录的son的size进行比较，若大于已经记录的size，则进行一次更新，将新的父节点记录为son。经过一轮横向迭代，就可以得到这一迭代父节点的重儿子。在所有节点的重儿子都已经找到则完成第一次dfs。</p>
+<p>&emsp;&emsp;第二次dfs时，从根节点开始，将这个节点的top记录为自己(top代表一条重链的顶端节点)，然后优先向son搜索，将son的top也记录为上一节点的top。然后再遍历其它轻儿子，对于每个轻儿子他们也有自己的重儿子，所以也是进行相同操作。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> depth)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    fa[v]=u;<span class="comment">//标记父节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    d[V]=depth;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    siz[v]=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[v];i;i=edge[i].next)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> t=edge[i].to;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(t==u)<span class="keyword">continue</span>;<span class="comment">//子节点不能个和父节点重合</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        dfs1(v,t,depth+<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        siz[v]+=siz[t];<span class="comment">//获取子树大小</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(siz[v]&gt;siz[son[v]])son[v]=t;<span class="comment">//通过比较获取重儿子</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> f)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    top[n]=f;<span class="comment">//记录一条重链的第一个节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(!son[n])<span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    dfs2(son[n],f);<span class="comment">//优先搜索重儿子传递同一重链的头节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[n];i;i=edge[i].next)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> v=edge[n].to;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(v==son[n]||v=fa[n])<span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        dfs2(v,v);<span class="comment">//搜索轻儿子，该重链的头结点就是自己</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这只是重链剖分的基本操作，以得到重链，下面是一道重链剖分和线段树的结合模板题。</p>
+<p><a href="https://www.luogu.com.cn/problem/P3384" target="_blank" rel="noopener">原题P3384</a></p>
+<p>&emsp;&emsp;先来考虑前两种操作，这两种都是类似中序遍历的操作顺序，这就需要lca的思想，而这里实际用到的则是重链。利用重链上的节点所记录的top进行快速跳转，使得所求的两点移动到同一条重链上然后再进行同一条链上的操作。</p>
+<p>&emsp;&emsp;为什么要在同一条重链上呢？这是因为在重链生成的dfs2中，会对节点进行编号，而我们都知道的，在第二次深搜中我们总是优先进入重儿子，因此一条重链上的点编号是连续的。因此我们对应的建立<font color=66ccff>线段树</font>，因为线段树上的操作对于连续的区间十分有利，因此我们将编号好的的树映射到线段树上,于是同一条重链上的节点就会在线段树的叶节点上呈现为连续的分布。</p>
+<p>&emsp;&emsp;那么我们需要修改的就是第二次深搜和线段树的建树过程。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> f)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    top[n]=f;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    id[n]=++cnt;<span class="comment">//记录每个的编号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    rank[cnt]=n;<span class="comment">//将节点按照顺序放入数组中，在建立线段树时利用这个进行叶节点赋值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(!son[n])<span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    dfs2(son[n],f);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[n];i;i=edge[i].next)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> v=edge[n].to;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(v==son[n]||v=fa[n])<span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        dfs2(v,v);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    nide[n].l=l;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    node[n].r=r;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(l==r)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        node[n].sum=rank[l];<span class="comment">//利用顺序数组进行赋值，当区间左右边界相同时，边界也就是编号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    create(n&lt;&lt;<span class="number">1</span>,l,mid);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    create(n&lt;&lt;<span class="number">1</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    node[n].sum=node[n&lt;&lt;<span class="number">1</span>].sum+node[n&lt;&lt;<span class="number">1</span>+<span class="number">1</span>].sum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>&emsp;&emsp;到此也就完成了树状数组到线段树的映射。那么接下来怎么进行中序求和以及修改呢？我们目前已经有了下面的线段树的求和与修改操作(如果不懂上面有链接)：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(node[n].l&gt;=l&amp;&amp;node[n].r&lt;=r)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> node[n].sum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    pushDown(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> mid=(node[n].l+node[n].r)&gt;&gt;<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(l&lt;=mid)ans+=search(n&lt;&lt;<span class="number">1</span>,l,mid);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(r&gt;mid)ans+=search(n&lt;&lt;<span class="number">1</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> k,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(node[n].l&gt;=l&amp;&amp;node[n].r&lt;=r)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        node[n].sum+=k*(node[n].r-node[n].l+<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        node[n].lz=k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    pushDown(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> mid=(node[n].l+node[n].r)&gt;&gt;<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(l&lt;=mid)add(n&lt;&lt;<span class="number">1</span>,k,l,mid);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(r&gt;mid)add(n&lt;&lt;<span class="number">1</span>+<span class="number">1</span>,k,mid+<span class="number">1</span>,r);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    node[n].sum=node[n&lt;&lt;<span class="number">1</span>].sum+node[n&lt;&lt;<span class="number">1</span>+<span class="number">1</span>].sum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>&emsp;&emsp;那么正如上面所说我们的思想与lca无异(倍增的那种)，我们首先有两个所求的点，我们先对他们的top进行判断(因为每次跃迁都是直达top节点的父节点，因此可能会跳过头)，找到top节点更低的那个进行首次跃迁(当然如果top相同的话那就直接进入下一环节)，直接将节点移动到top的父节点，当然同时要对原节点和top节点之间进行一次线段树的求和或者修改操作。跃迁之后再次进行相同的判断，知道两个所求的节点的top相同，那么此时两点处于同一重链上，可以直接用线段树的操作进行最后的计算。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TreeSum</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(top[x]!=top[y])&#123;<span class="comment">//直到两点处于同一条重链上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(d[top[x]]&lt;d[top[y]])swap(x,y);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        ans=(ans+sum(<span class="number">1</span>,id[top[x]],id[x]))%mod;<span class="comment">//同一重链在线段树上是连续区间所以直接进行线段树操作，同时将要跳过的这段和先记录</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        x=fa[top[x]];<span class="comment">//进行跃迁</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(d[x]&gt;d[y])swap(x,y);<span class="comment">//重链上按照从上到下的顺序在线段树叶节点上从左到右排布</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    ans=(ans+sum(<span class="number">1</span>,id[x],id[y]))%mod;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TreeAdd</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> k)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(top[x]!=top[y])&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(d[top[x]]&lt;d[top[y]])swap(x,y);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        add(<span class="number">1</span>,id[top[x]],id[x]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        x=fa[top[x]];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(d[x]&gt;d[y])swap(x,y);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    add(<span class="number">1</span>,x,y);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<hr>
 
       
     </div>
@@ -450,8 +462,8 @@ ans=x^{2^{p_1}+2^{p_2}+\cdots+2^{p_n}}=x^{2^{p_1}}*x^{2^{p_2}}*\cdots*x^{2^{p_n}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/03/Data-Structure/" rel="next" title="Data Structure">
-                <i class="fa fa-chevron-left"></i> Data Structure
+              <a href="/2020/04/30/Segment-Tree/" rel="next" title="Segment Tree">
+                <i class="fa fa-chevron-left"></i> Segment Tree
               </a>
             
           </div>
@@ -459,10 +471,6 @@ ans=x^{2^{p_1}+2^{p_2}+\cdots+2^{p_n}}=x^{2^{p_1}}*x^{2^{p_2}}*\cdots*x^{2^{p_n}
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/12/09/Ehrlich-Sieve-and-Linear-Sieve/" rel="prev" title="Ehrlich Sieve and Linear Sieve">
-                Ehrlich Sieve and Linear Sieve <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1142,26 +1150,6 @@ ans=x^{2^{p_1}+2^{p_2}+\cdots+2^{p_n}}=x^{2^{p_1}}*x^{2^{p_2}}*\cdots*x^{2^{p_n}
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
