@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-01T15:01:28.137Z</updated>
+  <updated>2020-06-08T04:58:18.451Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KMP</title>
+    <link href="http://yoursite.com/2020/06/07/KMP/"/>
+    <id>http://yoursite.com/2020/06/07/KMP/</id>
+    <published>2020-06-06T16:00:00.000Z</published>
+    <updated>2020-06-08T04:58:18.451Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><center><font size=10 color=66ccff>KMP</font></center><p>&emsp;&emsp;Knuth、Morris、Pratt三人发现了这个算法，于是就叫KMP了。这是一个关于字符串模式匹配的算法，也就是给一个长字符串，然后在其中查找与另一个较短字符串相同的子串。</p><p>&emsp;&emsp;通常我们的做法可能是逐段比较，这耗费的时间复杂度是O(mn)级的。当两段字符串到达一定程度时是非常耗时的，所有就有了这种遍历优化的算法。</p><p>&emsp;&emsp;先来看看普通解法，我们用两个指针分别在两端字符串上从头开始移动，如果当前对应位置字符相同，那么两个指针分别向右移动一格；如果不相同，则指针回退，回退的距离就是长字符串移动到这次遍历开始点的下一个，也就是往前进一格，而模板字符串则移动到开头。然后不断重复操作得到结果。</p><p>&emsp;&emsp;那么KMP是怎么做的呢？普通做法中每次匹配失败总是长字符串直接回退到原点的后一格，模板字符串回退到原点。但是我也知道一个字符串中前n个字符可能和最后n个字符完全匹配。那么这种模板字符串在与长字符串匹配了m个,这m个字符中，前n个和后n个这两段子串完全匹配，那么在第(m+1)个匹配失败时，我们无需移动长字符串的指针，我们只移动模板字符串的指针。</p><p>&emsp;&emsp;由上面前置条件可知对于模板字符串[0,n]和[m-n+1,m]这两个子串是相同的，也就是前缀和后缀相同，那么我们可以将前面n个移动到后面n个的位置，也就是指针回到n+1的位置。这就保证了移动距离小但又能使得当前指针前的字符全部匹配，然后再从指针后面开始判断。</p><p>举例来表示一下<span style="heimu" title="嘘~~">可惜我不会做动画示意</span>：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ABABBABABAABA(长字符串)</span><br><span class="line">ABAAB(模板字符串)</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;观察一下就可以发现模板字符串与长字符串相符的是哪一段，但是实际操作我们还是从头开始匹配。当我们按照正常的逐个匹配，到第4个字符时开始出现匹配失败。此时匹配成功的就是前3个字符”ABA”，这段字符我们可以得到的相同前后缀就是’A’，那么我们可以把前缀’A’移到后缀’A’的位置，也就是将模板字符串的指针从第4个移到第2个，因为第1个到了原来第3的位置也与对应长字符串第3个匹配。而且此时长字符串的指针不动的话是指在第4个(已匹配的’A’的下一个和模板字符串一样)。接下来就可以继续从第2个字符开始匹配。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AB|ABBABABAABA</span><br><span class="line">__|ABAAB</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;竖线的左边是已经匹配过并且不可能在连续全匹配的子串中出现的。右边是接下来要匹配的。</p><p>&emsp;&emsp;通过这种方法，每次遇到匹配失败的字符就进行跳转，将模板的前缀移至相同后缀处再继续。</p><p>&emsp;&emsp;那么剩下的问题就只有如何快速求得模板字符串的相同前后缀。<span style="heimu" title="你知道的太多了">如果这里还用暴力就没有意义了。</span>在上面的匹配过程可以看出来，我们在用到相同前后缀的时候，往往会需要模板不同长度的子串的相同前后缀，也就是[0,m]段。那么为了快速取值，我们可以建立m从0到模板长度的一个前后缀长度储值数组，用next[m]来表示[0,m]的最大相同前后缀的长度。</p><p>&emsp;&emsp;此处我们利用递推来建表。m从0开始(根据数组规则来0表示第一个字符位置)，m为0时next[m]设为-1，代表没有相同前后缀。然后向下遍历，指针向后移动一格，我们首先看前一格的next值：</p><p>如果是-1，那么说明上一格与第一个字符不同(或者就是第一个字符)，此时只需要判断这一格的字符与第一个是否相同，如果相同就说明到m为止最大相同前后缀长度为1，但是此处我们记录为0(因为数组下标从0开始，要用这个长度定位也从0开始更方便)；</p><p>如果前一格的next值大于等于0，说明在这一格之前已经有一段最大相同前后缀，那么我们就需要判断这一格与已经确定的前缀的下一格的字符是否相同，也就是m和next[m-1]+1。如果相同则说明在指针移动一格到当前位置后，相同前后缀又多了一个字符。所以next[m]=next[m]+1；如果不同，我们就需要进行回退，就是取得next[next[m-1]]的值，为什么要这样取呢？首先next[m-1]所指向的位置就是[0,m-1]的最大相同前后缀的前缀右端，既然这段加上下一个字符无法构成相同前后缀，我们为了得到最大的移动优化，自然会希望相同前后缀越长越好，我们就把后缀的左端向后移动右端不变，自然的前缀也要缩短，但是前缀的左端必定是在子串的第一个，但是右端也必须和后缀右端保持一致，那么我们就不能单纯的移动右端(next[m-1])，而是要知道在[0,next[m-1]]中是否存在[0,x]使得匹配后缀的右边部分，并且尽量的长。<font color=red>也就是在前缀中再寻找相同前后缀。</font>保证剩下的尽量长，也就是[0,next[next[m-1]]]。然后再看当前指针所在处(m)的字符能否与next[next[m-1]]匹配，如果能就+1，不能就继续。这种回退持续到next[x]=-1为止，毕竟-1代表以他为右端的子串没有相同前后缀。最后进行判断是因为字符匹配还是因为next值到了-1而停止的回退。</p><p>&emsp;&emsp;经过上述操作技能得到关于模板的每段子串的最大相同前后缀的长度数组，然后就可以直接应用于模板匹配的遍历中了。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"><span class="keyword">char</span> model[N];</span><br><span class="line"><span class="keyword">int</span> next[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">prepare</span><span class="params">()</span></span>&#123;</span><br><span class="line">    next[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;N;++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> j=next[i<span class="number">-1</span>];<span class="comment">//取得前缀右端</span></span><br><span class="line">        <span class="keyword">while</span>(j&gt;=<span class="number">0</span>&amp;&amp;model[j+<span class="number">1</span>]!=model[i])&#123;</span><br><span class="line">            j=next[j];<span class="comment">//上面那一大段的回退操作</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(model[j+<span class="number">1</span>]==modle[i])&#123;<span class="comment">//无论j(也就是最后一次回退得到的前缀右端，，为-1表示不存在符合的前缀了)是否为-1，我们都比较j的下一个字符和当前指针所指字符是否相同</span></span><br><span class="line">            next[i]=j+<span class="number">1</span>;<span class="comment">//若相同则表示多了一个相同字符,此处的j既是符合要求的前缀右端，又表示这段前缀的长度</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            next[i]=<span class="number">-1</span>;<span class="comment">//不相同则说明这一段字串没有相同前后缀</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kmp</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;<span class="built_in">strlen</span>(str)&amp;&amp;j&lt;<span class="built_in">strlen</span>(model))&#123;</span><br><span class="line">        <span class="keyword">if</span>(str[i]==model[j])&#123;<span class="comment">//若字符匹配，则两个指针均向前移动</span></span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            j=next[j]+<span class="number">1</span>;<span class="comment">//回退操作</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="built_in">strlen</span>(str))<span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//如果i小于长字符串的长度，那说明模板已经匹配完了</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>Trie</title>
@@ -485,32 +511,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Arrival of the General</title>
-    <link href="http://yoursite.com/2019/11/28/Arrival-of-the-General/"/>
-    <id>http://yoursite.com/2019/11/28/Arrival-of-the-General/</id>
-    <published>2019-11-27T16:00:00.000Z</published>
-    <updated>2019-11-28T17:05:58.400Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>    <div id="aplayer-JwcMGQxu" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="1371262339" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"    ></div><h1 id="CodeForces-144A"><a href="#CodeForces-144A" class="headerlink" title="CodeForces 144A"></a><strong>CodeForces 144A</strong></h1><h2 id="Arrival-of-the-General"><a href="#Arrival-of-the-General" class="headerlink" title="Arrival of the General"></a>Arrival of the General</h2><p><p1>&emsp;A Ministry for Defense sent a general to inspect the Super Secret Military Squad under the command of the Colonel SuperDuper. Having learned the news, the colonel ordered to all n squad soldiers to line up on the parade ground.</p1><br></p><p><p2>&emsp;By the military charter the soldiers should stand in the order of non-increasing of their height. But as there’s virtually no time to do that, the soldiers lined up in the arbitrary order. However, the general is rather short-sighted and he thinks that the soldiers lined up correctly if the first soldier in the line has the maximum height and the last soldier has the minimum height. Please note that the way other solders are positioned does not matter, including the case when there are several soldiers whose height is maximum or minimum. Only the heights of the first and the last soldier are important.</p2><br></p><p><p3>&emsp;For example, the general considers the sequence of heights (4, 3, 4, 2, 1, 1) correct and the sequence (4, 3, 1, 2, 2) wrong.</p3><br></p><p4>&emsp;Within one second the colonel can swap any two neighboring soldiers. Help him count the minimum time needed to form a line-up which the general will consider correct.</p4><p><strong>Input</strong></p><p>&emsp;The first input line contains the only integer n (2 ≤ n ≤ 100) which represents the number of soldiers in the line. The second line contains integers a1, a2, …, an (1 ≤ ai ≤ 100) the values of the soldiers’ heights in the order of soldiers’ heights’ increasing in the order from the beginning of the line to its end. The numbers are space-separated. Numbers a1, a2, …, an are not necessarily different.</p><p><strong>Output</strong></p><p><p>&emsp;Print the only integer — the minimum number of seconds the colonel will need to form a line-up the general will like.</p></p><hr><p><strong>Example</strong><br><br><br>input<br></p><p><pre>433 44 11 22</pre><br><br>output<br></p><p><pre>2</pre><br><br>input<br></p><p><pre>710 10 58 31 63 40 76</pre><br><br>output<br></p><p><pre>10</pre></p><hr><p><strong>代码如下（AC）：</strong><br></p><p><pre></p><h1 id="include”pch-h”"><a href="#include”pch-h”" class="headerlink" title="include”pch.h”"></a>include”pch.h”</h1><h1 id="include"><a href="#include" class="headerlink" title="include"></a>include<iostream></h1><pre><code>gen</code></pre><p>using namespace std;</p><p>int main() {<br>    int n;<br>    int s[101];<br>    int p1=0, p2=0;<br>    int max, min;<br>    cin &gt;&gt; n;<br>    cin &gt;&gt; s[0];<br>    max = s[0];<br>    min = s[0];<br>    for (int i = 1; i&lt; n; i++) {<br>        cin &gt;&gt; s[i];<br>        if (max &lt; s[i]) {<br>            max = s[i];<br>            p1 = i;<br>        }<br>        if (min &gt;= s[i]) {<br>            min = s[i];<br>            p2 = i;<br>        }<br>    }<br>    if (p1 &lt; p2)<br>        cout &lt;&lt; p1 + n - 1 - p2 &lt;&lt; endl;<br>    else<br>        cout &lt;&lt; p1 + n - 2 - p2 &lt;&lt; endl;<br>    return 0;<br>}<br>&lt;/pre&gt;</p><hr><p><strong>解题思路：</strong><br></p><p><p1>&emsp;&emsp;首先，题面确定了最左边的最高的，最右边的是最低的，而在队列中间的顺序不予考虑。那么，先对情境做一个转换，即在一组乱序数列中，寻找一个最大值移至首位，一个最小值移至末尾，并得到最小移动步数。</p1><br></p><p><p2>&emsp;&emsp;数字在数组中的移动可以通过迭代实现，但如何得到最小步数呢？这时就需要考虑到最小值或最大值出现多次的情况，这可能影响你选择作为移动的那个数。但我们已经事先知道最大值要去最左边，最小值要去最右边，那么需要被移动的最大值对应的下标应该尽量小（因为使用数组时，用下标大小模拟左右），相反的最小值的下标应该尽量大。</p2><br></p><p><p3>&emsp;&emsp;再来看看如何取得所需的下标。最大值和最小值的初始值均取<code>s[0]</code>，即位于最左端，那么对于变量max来说，如果之后遇到相等的值，将保留现有下标；对于变量min来说，遇到相等的值应该获取更大的下标。</p3><br></p><p><p4>&emsp;&emsp;取得各自的下标后，若最大值下标在左，则只需将移动步数相加即可；若最大值下标在右，则需考虑两值交换只算一步，总数需减一。</p4></p><hr>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="Exercises" scheme="http://yoursite.com/categories/Exercises/"/>
-    
-    
-      <category term="Threshold" scheme="http://yoursite.com/tags/Threshold/"/>
     
   </entry>
   
