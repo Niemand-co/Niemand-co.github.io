@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Palindromic Tree - Niemand</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Niemand,"> 
+    <meta name="description" content="Palindromic Tree
+
+&amp;emsp;&amp;emsp;回文树(Palindromic Tree，又称回文自动机)，顾名思义就是来解决回文问题的。具体解决什么问题自己看着办，比如一段字符串中的回,"> 
+    <meta name="author" content="Niemand"> 
+    <link rel="alternative" href="atom.xml" title="Niemand" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Niemand</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Palindromic Tree</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Palindromic Tree</h1>
+        <div class="stuff">
+            <span>六月 26, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <center><font size=8 color=66ccff>Palindromic Tree</font></center>
+
+<p>&emsp;&emsp;回文树(Palindromic Tree，又称回文自动机)，顾名思义就是来解决回文问题的。具体解决什么问题自己看着办，比如一段字符串中的回文串数量、同一回文串的数量、某一回文串的最长回文后缀等。先来讲一下回文自动机的基本思想。</p>
+<p>&emsp;&emsp;首先有几个数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">len[u];代表节点u的回文串长度</span><br><span class="line">fail[u];自动机中熟悉的失配指针，但更准确地说应该是后缀指针</span><br><span class="line">trans[u][c];节点路径，c就是每条路径所增加的字符，也就是往u的两边分别加上c就等到了新回文串</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;回文树的建立基点就是每个节点代表一个回文串，而节点之间的路径就是上一节点到这一节点增加的两端的字符。而回文树最大的特典就是它有两棵树，一个代表偶数个字符的回文串，另一个代表奇数个字符<span class="heimu" title="你知道的太多了！">虽然没有任何影响</span>。</p>
+<p>&emsp;&emsp;那么这个fail指针怎么用呢？它是指向本节点回文串的最长回文后缀的，我们都知道在经过一段路径时，我们是拿原回文串在两边加上两个路径上的字符。但是在原字符串中，这个回文串的左边一个字符也必须与路径字符相同，否则无法保证两边都加上相同的字符，也就无法成为新的更长的回文串。那么我们就需要先判断上一回文串的左一个字符是否等于当前路径新加的字符，如果是则进入下一节点，如果下一节点没有回文串，怎创建该节点(跟字典树的操作差不多)；如果字符匹配不成功，那么就走fail指针，因为最大回文后缀可能就是右端紧贴当前新字符的最大回文串了，然后再进行判断。</p>
+<p>&emsp;&emsp;这样就已经完成了向树上添加新回文串，但是我们还需要为每个新回文串的节点添加新的fail指针。fail指针指向的是回文串的最大回文后缀，也就是原回文串的最大回文后缀再加上新字符(经过多次匹配最终能直接添加新字符得到新回文串的那个原回文串<span class="heimu" title="你知道的太多了！">草</span>)。而同样的，原回文串的最大回文后缀添加新字符也未必就是回文的，因此又要进行和上一段一样的操作。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> len[N];</span><br><span class="line"><span class="keyword">int</span> fail[N];</span><br><span class="line"><span class="keyword">int</span> trans[N][<span class="number">26</span>];</span><br><span class="line"><span class="keyword">int</span> num[N];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="keyword">int</span> last;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    len[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    len[<span class="number">1</span>]=<span class="number">-1</span>;</span><br><span class="line">    fail[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    fail[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    last=<span class="number">0</span>;</span><br><span class="line">    cnt=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(trans[<span class="number">0</span>],<span class="number">0</span>,<span class="keyword">sizeof</span>(trans[<span class="number">0</span>]));</span><br><span class="line">    <span class="built_in">memset</span>(trans[<span class="number">1</span>],<span class="number">0</span>,<span class="keyword">sizeof</span>(trans[<span class="number">1</span>]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">newNode</span><span class="params">(<span class="keyword">int</span> l)</span></span>&#123;</span><br><span class="line">    cnt++;</span><br><span class="line">    len[cnt]=l;</span><br><span class="line">    <span class="built_in">memset</span>(trans[cnt],<span class="number">0</span>,<span class="keyword">sizeof</span>(trans[cnt]));</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PAM</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;<span class="keyword">int</span>(s.length());++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> u=last;<span class="comment">//last=0;</span></span><br><span class="line">        <span class="keyword">int</span> c=s[i]-<span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">while</span>(s[i-len[u]<span class="number">-1</span>]!=s[i])u=fail[u];</span><br><span class="line">        <span class="keyword">if</span>(trans[u][c]==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> now = newNode(len[u]+<span class="number">2</span>);<span class="comment">//now=1</span></span><br><span class="line">            <span class="keyword">int</span> v = fail[u];<span class="comment">//1</span></span><br><span class="line">            <span class="keyword">while</span>(s[i-len[v]<span class="number">-1</span>]!=s[i])v=fail[v];</span><br><span class="line">            fail[now]=trans[v][c];</span><br><span class="line">            trans[u][c]=now;</span><br><span class="line">            num[now]=num[fail[now]]+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        last=trans[u][c];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='Iv1.fe2e3b8407f255a8'
+        data-cs='8495d4c923056665c789914e42e2355b1056eb9b'
+        data-r='Niemand-co.github.io'
+        data-o='Niemand-co'
+        data-a='Niemand-co'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+				
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>
