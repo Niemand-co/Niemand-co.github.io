@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bezier Curve - Niemand</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Niemand,"> 
+    <meta name="description" content="Bezier Curve
+
+&amp;emsp;&amp;emsp;在图形学中表现图片时，当不断放大图片时有的图会出现像素点，而有的却不会。前者是位图，而后者是矢量图。矢量图就是由曲线绘制的，但我们如何不通过像素绘,"> 
+    <meta name="author" content="Niemand"> 
+    <link rel="alternative" href="atom.xml" title="Niemand" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Niemand</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Bezier Curve</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Bezier Curve</h1>
+        <div class="stuff">
+            <span>七月 04, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Computer-Graphics/" rel="tag">Computer Graphics</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <center><font size=8 color=66ccff>Bezier Curve</font></center>
+
+<p>&emsp;&emsp;在图形学中表现图片时，当不断放大图片时有的图会出现像素点，而有的却不会。前者是位图，而后者是矢量图。矢量图就是由曲线绘制的，但我们如何不通过像素绘制而得到一段曲线呢？贝塞尔曲线(Bezier Curve)就是为此而生的。</p>
+<p><img src="E:\blog\source\images\Bezier1.png" alt="Bezier1"></p>
+<p>&emsp;&emsp;以上图为例，两条线段的三个端点a、b、c来确定一条曲线，首先两个边缘端点自然是曲线的两个端点。那么曲线的弯曲程度如何确定呢？我们先在线段ab上确定一点A，设$\frac{aA}{ab}$为$t$，则$Ab$占$(1-t)$，我们同样在bc上取一段bB使得$\frac{bB}{bC}$为$t$，然后我们连接AB得到下图:</p>
+<p><img src="E:\blog\source\images\Bezier2.png" alt="Bezier2"></p>
+<p>&emsp;&emsp;在AB上同样以相同比例取得一点C，此C即为曲线上的一点了。然后我们将$t$从0到1全部遍历一遍就能得到曲线上的所有的点了，也就连成了一条曲线。</p>
+<p>&emsp;&emsp;那么我们如何用代码画出这一条曲线呢？首先我们先用数学方法处理这个问题。我们设每个点都有自己的坐标，那么$A=(1-t)a+tb,B=(1-t)b+tc,C=(1-t)A+tB$。将前两个式子代入，得到$C=(1-t)^2a+2(1-t)tb+t^2c$。而我们要想使得曲线的控制更多样，我们可以引入更多的端点，如果有四个端点，那么我们先在第一线段和第二线段之间话说相同比例点相连的线段，第二和第三线段之间再作出相连线段，最后再两个新作出的线段之间作出相连阶段并在上面找到比例点，也就是曲线上的点，此时这个点就是$(1-t)^3a+3(1-t)^2tb+3(1-t)t^2c+t^3d$。</p>
+<p>&emsp;&emsp;那么看上面的式子可以发现，在控制一条曲线的端点越来越多时，曲线上的点和各端点的关系式呈现出二项式分布的特征，总结一下就是$\sum^{n}_{i=0}C_n^i(1-t)^{n-i}t^ip[i]$。此时就可以用代码写出了。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Point2f&gt; control_points;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouse_handler</span><span class="params">(<span class="keyword">int</span> event, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> flags, <span class="keyword">void</span> *userdata)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event == cv::EVENT_LBUTTONDOWN &amp;&amp; control_points.size() &lt; <span class="number">4</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Left button of the mouse is clicked - position ("</span> &lt;&lt; x &lt;&lt; <span class="string">", "</span></span><br><span class="line">        &lt;&lt; y &lt;&lt; <span class="string">")"</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        control_points.emplace_back(x, y);</span><br><span class="line">    &#125;     </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">naive_bezier</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Point2f&gt; &amp;points, cv::Mat &amp;window)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> &amp;p_0 = points[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">auto</span> &amp;p_1 = points[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">auto</span> &amp;p_2 = points[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">auto</span> &amp;p_3 = points[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">double</span> t = <span class="number">0.0</span>; t &lt;= <span class="number">1.0</span>; t += <span class="number">0.001</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> point = <span class="built_in">std</span>::<span class="built_in">pow</span>(<span class="number">1</span> - t, <span class="number">3</span>) * p_0 + <span class="number">3</span> * t * <span class="built_in">std</span>::<span class="built_in">pow</span>(<span class="number">1</span> - t, <span class="number">2</span>) * p_1 +</span><br><span class="line">                 <span class="number">3</span> * <span class="built_in">std</span>::<span class="built_in">pow</span>(t, <span class="number">2</span>) * (<span class="number">1</span> - t) * p_2 + <span class="built_in">std</span>::<span class="built_in">pow</span>(t, <span class="number">3</span>) * p_3;</span><br><span class="line"></span><br><span class="line">        window.at&lt;cv::Vec3b&gt;(point.y, point.x)[<span class="number">2</span>] = <span class="number">255</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> f;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (x == <span class="number">0</span> || x == <span class="number">1</span>)</span><br><span class="line">        f = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        f = factorial(x - <span class="number">1</span>) * x;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">cv::Point2f <span class="title">recursive_bezier</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Point2f&gt; &amp;control_points, <span class="keyword">float</span> t)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Implement de Casteljau's algorithm</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数学方法</span></span><br><span class="line">    <span class="comment">// int n = control_points.size();</span></span><br><span class="line">    <span class="comment">// cv::Point2f point = &#123;0.0f, 0.0f&#125;;</span></span><br><span class="line">    <span class="comment">// for (int i = 0; i &lt; n; i++)</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     int c = factorial(n - 1) / (factorial(i) * factorial(n - 1 - i));</span></span><br><span class="line">    <span class="comment">//     point += c * std::pow(t, i) * std::pow(1 - t, n - 1 - i) * control_points[i];</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对贝塞尔曲线进行插值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bezier</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Point2f&gt; &amp;control_points, cv::Mat &amp;window)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Iterate through all t = 0 to t = 1 with small steps, and call de Casteljau's </span></span><br><span class="line">    <span class="comment">// recursive Bezier algorithm.</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">double</span> t = <span class="number">0.0</span>; t &lt;= <span class="number">1.0</span>; t += <span class="number">0.0001</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cv::Point2f point = recursive_bezier(control_points, t);</span><br><span class="line">        window.at&lt;cv::Vec3b&gt;(point.y, point.x)[<span class="number">1</span>] = <span class="number">255</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//anti-aliasing</span></span><br><span class="line">        <span class="keyword">float</span> x = point.x - <span class="built_in">std</span>::<span class="built_in">floor</span>(point.x);</span><br><span class="line">        <span class="keyword">float</span> y = point.y - <span class="built_in">std</span>::<span class="built_in">floor</span>(point.y);</span><br><span class="line">        <span class="keyword">int</span> x_flag = x &lt; <span class="number">0.5f</span> ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> y_flag = y &lt; <span class="number">0.5f</span> ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 距离采样点最近的4个坐标点</span></span><br><span class="line">        cv::Point2f p00 = cv::Point2f(<span class="built_in">std</span>::<span class="built_in">floor</span>(point.x) + <span class="number">0.5f</span>, <span class="built_in">std</span>::<span class="built_in">floor</span>(point.y) + <span class="number">0.5f</span>);</span><br><span class="line">        cv::Point2f p01 = cv::Point2f(<span class="built_in">std</span>::<span class="built_in">floor</span>(point.x + x_flag * <span class="number">1.0f</span>) + <span class="number">0.5f</span>, <span class="built_in">std</span>::<span class="built_in">floor</span>(point.y) + <span class="number">0.5f</span>);</span><br><span class="line">        cv::Point2f p10 = cv::Point2f(<span class="built_in">std</span>::<span class="built_in">floor</span>(point.x) + <span class="number">0.5f</span>, <span class="built_in">std</span>::<span class="built_in">floor</span>(point.y + y_flag * <span class="number">1.0f</span>) + <span class="number">0.5f</span>);</span><br><span class="line">        cv::Point2f p11 = cv::Point2f(<span class="built_in">std</span>::<span class="built_in">floor</span>(point.x + x_flag * <span class="number">1.0f</span>) + <span class="number">0.5f</span>, <span class="built_in">std</span>::<span class="built_in">floor</span>(point.y + y_flag * <span class="number">1.0f</span>) + <span class="number">0.5f</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Point2f&gt; vec;</span><br><span class="line">        vec.push_back(p01);</span><br><span class="line">        vec.push_back(p10);</span><br><span class="line">        vec.push_back(p11);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 计算最近的坐标点与采样点距离</span></span><br><span class="line">        cv::Point2f distance = p00 - point;</span><br><span class="line">        <span class="keyword">float</span> len = <span class="built_in">sqrt</span>(distance.x * distance.x + distance.y * distance.y);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对边缘点进行着色</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p:vec)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 根据距离比, 计算边缘点影响系数 </span></span><br><span class="line">            cv::Point2f d = p - point;</span><br><span class="line">            <span class="keyword">float</span> l = <span class="built_in">sqrt</span>(d.x * d.x + d.y * d.y);</span><br><span class="line">            <span class="keyword">float</span> percnet = len / l;</span><br><span class="line"></span><br><span class="line">            cv::Vec3d color = window.at&lt;cv::Vec3b&gt;(p.y, p.x);</span><br><span class="line">            <span class="comment">// 此处简单粗暴取最大值</span></span><br><span class="line">            color[<span class="number">1</span>] = <span class="built_in">std</span>::max(color[<span class="number">1</span>], (<span class="keyword">double</span>)<span class="number">255</span> * percnet);</span><br><span class="line">            window.at&lt;cv::Vec3b&gt;(p.y, p.x) = color;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat window = cv::Mat(<span class="number">700</span>, <span class="number">700</span>, CV_8UC3, cv::Scalar(<span class="number">0</span>));</span><br><span class="line">    cv::cvtColor(window, window, cv::COLOR_BGR2RGB);</span><br><span class="line">    cv::namedWindow(<span class="string">"Bezier Curve"</span>, cv::WINDOW_AUTOSIZE);</span><br><span class="line"></span><br><span class="line">    cv::setMouseCallback(<span class="string">"Bezier Curve"</span>, mouse_handler, <span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> key = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span> (key != <span class="number">27</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;point : control_points) </span><br><span class="line">        &#123;</span><br><span class="line">            cv::circle(window, point, <span class="number">3</span>, &#123;<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>&#125;, <span class="number">3</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (control_points.size() == <span class="number">4</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// naive_bezier(control_points, window);</span></span><br><span class="line">            bezier(control_points, window);</span><br><span class="line"></span><br><span class="line">            cv::imshow(<span class="string">"Bezier Curve"</span>, window);</span><br><span class="line">            cv::imwrite(<span class="string">"my_bezier_curve.png"</span>, window);</span><br><span class="line">            key = cv::waitKey(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cv::imshow(<span class="string">"Bezier Curve"</span>, window);</span><br><span class="line">        key = cv::waitKey(<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='Iv1.fe2e3b8407f255a8'
+        data-cs='8495d4c923056665c789914e42e2355b1056eb9b'
+        data-r='Niemand-co.github.io'
+        data-o='Niemand-co'
+        data-a='Niemand-co'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+				
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>

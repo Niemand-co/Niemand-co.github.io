@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Simple Mathematical Optimization - Niemand</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Niemand,"> 
+    <meta name="description" content="
+    
+Simple Mathematical Optimization
+CodeForces 451A
+
+
+&amp;emsp;After winning gold and silver in IOI,"> 
+    <meta name="author" content="Niemand"> 
+    <link rel="alternative" href="atom.xml" title="Niemand" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
+</head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Niemand</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Simple Mathematical Optimization</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Simple Mathematical Optimization</h1>
+        <div class="stuff">
+            <span>十一月 28, 2019</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Threshold/" rel="tag">Threshold</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            
+    <div id="aplayer-ZBpQJAaW" class="aplayer aplayer-tag-marker meting-tag-marker"
+         data-id="1371262339" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"
+    ></div>
+<h1 id="Simple-Mathematical-Optimization"><a href="#Simple-Mathematical-Optimization" class="headerlink" title="Simple Mathematical Optimization"></a><strong>Simple Mathematical Optimization</strong></h1><p><hr></p>
+<head><strong>CodeForces 451A</strong><meta name="generator" content="Hexo 4.0.0"><link rel="alternate" href="/atom.xml" title="Niemand" type="application/atom+xml">
+</head>
+
+<p><p1>&emsp;After winning gold and silver in IOI 2014, Akshat and Malvika want to have some fun. Now they are playing a game on a grid made of n horizontal and m vertical sticks.&lt;/p2&gt;<br></p>
+<p><p2>&emsp;An intersection point is any point on the grid which is formed by the intersection of one horizontal stick and one vertical stick.</p2><br></p>
+<p><p3>&amp;emspIn the grid shown below, n = 3 and m = 3. There are n + m = 6 sticks in total (horizontal sticks are shown in red and vertical sticks are shown in green). There are n·m = 9 intersection points, numbered from 1 to 9.</p3><br></p>
+<p><p4>&emsp;The rules of the game are very simple. The players move in turns. Akshat won gold, so he makes the first move. During his/her move, a player must choose any remaining intersection point and remove from the grid all sticks which pass through this point. A player will lose the game if he/she cannot make a move (i.e. there are no intersection points remaining on the grid at his/her move).</p4><br></p>
+<p><p5>&emsp;Assume that both players play optimally. Who will win the game?</p5><br></p>
+<hr>
+
+<p><strong>Input</strong></p>
+<p><p>&emsp;The first line of input contains two space-separated integers, n and m (1 ≤ n, m ≤ 100).</p><br><strong>Output</strong></p>
+<p><p>&emsp;Print a single line containing “Akshat” or “Malvika” (without the quotes), depending on the winner of the game.</p></p>
+<hr>
+
+<p><strong>Examples</strong><br><br><br>Input</p>
+<pre>2 2</pre>
+Output
+<pre>Malvika</pre>
+Input
+<pre>2 3</pre>
+Output
+<pre>Malvika</pre>
+Input
+<pre>3 3</pre>
+Output
+<pre>Akshat</pre>
+<strong>Note</strong><br>
+Explanation of the first sample:<br>
+<p1>&emsp;The grid has four intersection points, numbered from 1 to 4.</p1><br>
+<p2>&emsp;If Akshat chooses intersection point 1, then he will remove two sticks (1 - 2 and 1 - 3). The resulting grid will look like this.</p2><br>
+<p3>&emsp;Now there is only one remaining intersection point (i.e. 4). Malvika must choose it and remove both remaining sticks. After her move the grid will be empty.</p3><br>
+<p4>&emsp;In the empty grid, Akshat cannot make any move, hence he will lose.</p4><br>
+<p5>&emsp;Since all 4 intersection points of the grid are equivalent, Akshat will lose no matter which one he picks.</p5>
+<hr>
+<strong>代码如下（AC）：</strong>
+<pre>#include<iostream>
+
+using namespace std;
+
+int main(){
+    int x,y,t;
+    cin>>x>>y;
+    t=x<y?x:y;
+    if(t%2==0)
+        cout<<"Malvika";
+    else
+        cout<<"Akshat";
+    return 0;
+}</pre>
+<hr>
+<strong>解题思路：</strong><br>
+<p1>&emsp;&emsp;题目的意思是两个人，一次选择一个点，拿走构成该点的两根棒，拿走最后两根的人获胜。</p1><br>
+<p2>&emsp;&emsp;如果考虑模拟的做法，那么可能需要一个二维数组进行循环操作。但是这里需要优先在程序外考虑。假设这个矩阵有x条纵轴，y条横轴。首先由Akshat拿走一根纵轴和一根横轴，那么到了Malvika则剩余(x-1)条纵轴和(y-1)条横轴，重复前者的操作。当没有能选择的点则游戏结束，即横轴或纵轴有一边或两边为0。也就是说当横轴和纵轴里较少的一个被拿完则下一个轮到的为输家。</p2><br>
+<p3>&emsp;&emsp;就结论来看，谁是赢家取决于x和y中那个较小的数是奇是偶。</p3>
+<br><br><hr>
+
+<head><strong>CodeForces 460A</strong></head>
+<p1>&emsp;Vasya has n pairs of socks. In the morning of each day Vasya has to put on a pair of socks before he goes to school. When he comes home in the evening, Vasya takes off the used socks and throws them away. Every m-th day (at days with numbers m, 2m, 3m, …) mom buys a pair of socks to Vasya.</p1><br> <p2>&emsp;She does it late in the evening, so that Vasya cannot put on a new pair of socks before the next day. How many consecutive days pass until Vasya runs out of socks?</p2><br>
+<hr>
+<strong>Input</strong><br>
+<p>&emsp;The single line contains two integers n and m (1 ≤ n ≤ 100; 2 ≤ m ≤ 100), separated by a space.</p><br>
+<strong>Output</strong><br>
+<p>Print a single integer — the answer to the problem.</p><br>
+<hr>
+<strong>Examples</strong><br><br>
+Input
+<pre>2 2</pre>
+Output
+<pre>3</pre>
+Input
+<pre>9 3</pre>
+Output
+<pre>13</pre>
+
+<p><strong>Note</strong><br></p>
+<p><p1>&emsp;In the first sample Vasya spends the first two days wearing the socks that he had initially. Then on day three he puts on the socks that were bought on day two.</p1><br></p>
+<p><p2>&emsp;In the second sample Vasya spends the first nine days wearing the socks that he had initially. Then he spends three days wearing the socks that were bought on the third, sixth and ninth days. Than he spends another day wearing the socks that were bought on the twelfth day.</p2></p>
+<p><hr><br><strong>代码如下(AC)：</strong></p>
+<p><pre>#include<iostream></p>
+<p>using namespace std;</p>
+<p>int main() {<br>    int n, m;<br>    int d;<br>    cin &gt;&gt; n &gt;&gt; m;<br>    d = n * m / (m - 1);<br>    if (d%m == 0)<br>        d—;<br>    cout &lt;&lt; d &lt;&lt; endl;<br>    return 0;<br>}&lt;/pre&gt;</p>
+<p><hr><br><strong>解题思路：</strong><br></p>
+<p><p1>&emsp;&emsp;首先这题一般采取的是进行循环，至n≤m时停止循环，因为此时在袜子穿完前不会再只能加了。</p1><br></p>
+<p><p2>&emsp;&emsp;而这种操作虽然已经很简洁了，但依然O(n)的复杂度。那么，在编写程序前，先根据题面列出等式,并化简得：d=(n*m)/(m-1)。其中d至天数，而很快就会发现exanple中的第一对输入输出就不满足了，那么再脑内模拟一下就会发现在求得的d能整除m时d应该减一。因为在这种情况意味着在新袜子到的前一天刚好穿完了袜子，而新的袜子不能在第一天被穿。</p2><br></p>
+<p><p3>&emsp;&emsp;此时的程序要操作的主要步骤只有一条计算式和一个条件判断，复杂度为O(1)级。(虽然这优化可能没什么用，但这种思想可以应用到别的更复杂的题目中（如：约瑟夫环）。)</p3></p>
+<hr>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='Iv1.fe2e3b8407f255a8'
+        data-cs='8495d4c923056665c789914e42e2355b1056eb9b'
+        data-r='Niemand-co.github.io'
+        data-o='Niemand-co'
+        data-a='Niemand-co'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Simple-Mathematical-Optimization"><span class="toc-number">1.</span> <span class="toc-text">Simple Mathematical Optimization</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>

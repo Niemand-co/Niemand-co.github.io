@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Atcoder Beginner Contest 172 - Niemand</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Niemand,"> 
+    <meta name="description" content="Atcoder Beginner Contest 172
+
+比赛链接
+C.Tsundoku题意：有两堆书A和B，读完一本书要$a_i或者b_i$，但是两堆书都是按顺序堆放的，A和B堆只能从上往下按顺,"> 
+    <meta name="author" content="Niemand"> 
+    <link rel="alternative" href="atom.xml" title="Niemand" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Niemand</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Atcoder Beginner Contest 172</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Atcoder Beginner Contest 172</h1>
+        <div class="stuff">
+            <span>七月 01, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <center><font size=6 color=66ccff>Atcoder Beginner Contest 172</font></center>
+
+<p><a href="https://atcoder.jp/contests/abc172/tasks" target="_blank" rel="noopener">比赛链接</a></p>
+<h2 id="C-Tsundoku"><a href="#C-Tsundoku" class="headerlink" title="C.Tsundoku"></a><font color=ccccff>C.Tsundoku</font></h2><p>题意：有两堆书A和B，读完一本书要$a_i或者b_i$，但是两堆书都是按顺序堆放的，A和B堆只能从上往下按顺序读。给定时间k，要求在k时间内最多读多少本。</p>
+<p>&emsp;&emsp;利用尺取法的思想，也就是two pointers。首先假设将B组的书全部读完，算出总时间。然后我们两个pointer分别放在B组底端和A组顶端。首先判断B组全读完的总时间是否超过k，若超过则从低端开始逐一减去一本，知道时间刚好在k内，记录此时读的总本数，然后开始移动一格a组顶端的pointer，向总时间加入A组底端一本书的时间，如果此时总时间超过了k，就减去还在pointers范围内最下面的B组书，直到时间重新回到k内，然后记录总本数。每次加入一本A组书就如此操作并记录一次最后取得最大的总本数。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e6</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a[N],b[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    ll m,n,k;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">    ll tot=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;b[i];</span><br><span class="line">        tot+=b[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(ll i=<span class="number">0</span>,j=m;i&lt;=n;++i)&#123;</span><br><span class="line">        tot+=a[i];</span><br><span class="line">        <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;tot&gt;k)tot-=b[j--];</span><br><span class="line">        <span class="keyword">if</span>(tot&gt;k)<span class="keyword">break</span>;</span><br><span class="line">        ans=max(ans,i+j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="D-Sum-of-Divisors"><a href="#D-Sum-of-Divisors" class="headerlink" title="D.Sum of Divisors"></a><font color=ccccff>D.Sum of Divisors</font></h2><p>题意：给定一个函数$f(x)$是$x$的因数的个数，要求$\sum_1^n x\cdot f(x)$。</p>
+<p>&emsp;&emsp;我们进行两次遍历，第一层是[1,n]的因数遍历，因为最大的数就是n，所以所有数最大的因数也就到n，相当于遍历所有的数的因数。第二层是因数的倍数遍历，设第一层迭代数是i，第二层就是进行i,2i,3i…(while i &lt;= n)，每次向答案中加上第二层迭代数。例如第一层遍历到了2，那么第二层就是2,4,6…遍历到的都是小于n的x，而当第一层到了3时第二层还是会遍历到6，也就是说在第二层被遍历到的x的次数，也就是它所拥有的的因数的个数。而每次加上一个x(也就是第二层迭代数)总和就是因数个数乘上这个x，那么就和上述的$x\cdot f(x)$一样了，当遍历结束就相当于1到n都计算了一次。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll ans=<span class="number">0</span>;</span><br><span class="line">ll n=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;=n;j+=i)&#123;</span><br><span class="line">            ans+=j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="E-NEQ"><a href="#E-NEQ" class="headerlink" title="E.NEQ"></a><font color=ccccff>E.NEQ</font></h2><p>题解在另一个<a href="https://niemand-co.github.io/2020/06/29/Permutation-and-Combination/" target="_blank" rel="noopener">排列组合专题</a></p>
+<hr>
+<h2 id="F-Unfair-Nim"><a href="#F-Unfair-Nim" class="headerlink" title="F.Unfair Nim"></a><font color=ccccff>F.Unfair Nim</font></h2><p>题意：给了n堆石头，每堆石头有$a_i$个，Aoki和Takahashi进行游戏(Nim游戏)，每个人从当前堆中取出$[1,a_i]$个石头，到最后谁先没有石头可取了就输了，Aoki先手。但现在Takahashi有一次作弊机会，就是可以从第一堆中取出$[0,a_i)$个石头放到第二堆以确保自己能赢。请问至少拿多少个？</p>
+<p>&emsp;&emsp;这是博弈论的Nim游戏，也就有一个必输局面的规律就是设每堆石头为$a_i$个，那么当$a_1\oplus a_2\oplus a_3\oplus\cdots\oplus a_n=0$时，此时为必输局面<span class="heimu" title="你知道得太多了！">我也不懂原理是啥</span>，也就是这局面轮轮到谁，就是谁输。那么也就是说<span class="heimu" title="你知道的太多了！">人见人爱的高桥同学</span>Takahashi的这波作弊操作就是为了使得游戏一开始就呈现这样的局面，因为自己是后手。</p>
+<p>&emsp;&emsp;设第一堆操作前A个操作后a个，第二堆操作前B个操作后b个,除了前两堆，其它堆的异或和就是$X$，我们的目的是使得$a\oplus b\oplus X=0$，那么首先确定限制条件：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+a+b=A+B\\
+a\oplus b=X(相同数异或就是0)
+\end{cases}</script><p>&emsp;&emsp;通过加法运算到逻辑运算的转化$a+b=a\oplus b+2\cdot(a\land b)$，得到$a\land b=\frac{A+B-X}{2}$这条式子，那么转化一下方程组，用D来表示等号右边的新式子：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+a\land b=D\\
+a\oplus b=X
+\end{cases}</script><p>&emsp;&emsp;这个D可以事先通过计算得到，同时也自然得到了X，我们剩下要做的也就是找一个最大的$a(0\le a&lt;A)$满足上述式子。</p>
+<p>&emsp;&emsp;为了条件满足，我们将D和X都转成二进制数，然后逐位分析：</p>
+<blockquote>
+<p>当$D_i=1,X_i=1$时，逻辑上不成立</p>
+<p>当$D_i=1,X_i=0$时，$a_i=b_i=1$</p>
+<p>当$D_i=0,X_i=1$时，$a_i=1,b_i=0或者a_i=0,b_i=1$当时我们要得到最大的a，所以取前者</p>
+<p>当$D_i=0,X_i=0$时，$a_i=b_i=0$</p>
+</blockquote>
+<p>&emsp;&emsp;按照上述条件，我们给a的每一位二进制位赋值就好了，同时我们也要注意集中可能会导致a不存在的情况：</p>
+<blockquote>
+<p>$D_i=X_i=1$，逻辑上不成立</p>
+<p>$D<0\ or\ D>A$,或者$A+B-X$不能被2整除</p>
+<p>$a=0$</p>
+</blockquote>
+<p>&emsp;&emsp;按照这些限制条件遍历后就能得到最终的a从而得到答案，如果遇到了上述的错误条件，就直接挑出遍历输出-1.</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll N=<span class="number">305</span>;</span><br><span class="line"></span><br><span class="line">ll a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    ll X=<span class="number">0</span>,D;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">        <span class="keyword">if</span>(i&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            X^=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ll S = a[<span class="number">0</span>]+a[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span>(S-X&lt;<span class="number">0</span>||(S-X)%<span class="number">2</span>!=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        D = (S-X)/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = D;<span class="comment">//因为D是由a和b与运算得来的，所以a大于等于D</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">60</span>;i&gt;=<span class="number">0</span>;--i)&#123;</span><br><span class="line">        ll x = ((X&gt;&gt;i)&amp;<span class="number">1l</span>l),d = ((D&gt;&gt;i)&amp;<span class="number">1l</span>l);</span><br><span class="line">        <span class="keyword">if</span>(x&amp;&amp;d)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!d&amp;&amp;x&amp;&amp;(ans|<span class="number">1l</span>l&lt;&lt;i)&lt;=a[<span class="number">0</span>])&#123;<span class="comment">//原本有两种情况使得a_i为1，但其中一种是D_i=1已经在ans=D中直接赋值了</span></span><br><span class="line">            ans|=<span class="number">1l</span>l&lt;&lt;i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ans==<span class="number">0</span>||ans&gt;a[<span class="number">0</span>])</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;a[<span class="number">0</span>]-ans&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//第一堆减去操作后的第一堆才是移动的数量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/1371262339.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='Iv1.fe2e3b8407f255a8'
+        data-cs='8495d4c923056665c789914e42e2355b1056eb9b'
+        data-r='Niemand-co.github.io'
+        data-o='Niemand-co'
+        data-a='Niemand-co'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-Tsundoku"><span class="toc-number">1.</span> <span class="toc-text">C.Tsundoku</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-Sum-of-Divisors"><span class="toc-number">2.</span> <span class="toc-text">D.Sum of Divisors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-NEQ"><span class="toc-number">3.</span> <span class="toc-text">E.NEQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#F-Unfair-Nim"><span class="toc-number">4.</span> <span class="toc-text">F.Unfair Nim</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+</html>
